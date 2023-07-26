@@ -1,35 +1,42 @@
-import express from 'express'
-import payload from 'payload'
+import express from 'express';
+import { v4 as uuid } from 'uuid';
+import payload from './payload';
+import path from 'path';
+import { initRouteAPIV1 } from './routes';
+import cookies from 'cookie-parser';
 
-// eslint-disable-next-line
-require('dotenv').config()
+const expressApp = express();
+expressApp.use(cookies());
+expressApp.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 
-import { seed } from './seed'
-
-const app = express()
-
-// Redirect root to Admin panel
-app.get('/', (_, res) => {
-  res.redirect('/admin')
-})
-
-const start = async (): Promise<void> => {
+const startDev = async () => {
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.MONGODB_URI,
-    express: app,
-    onInit: () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+    secret: uuid(),
+    mongoURL: process.env.MONGO_URL || 'mongodb://localhost/payload',
+    express: expressApp,
+    email: {
+      logMockCredentials: true,
+      fromName: 'Payload',
+      fromAddress: 'hello@payloadcms.com',
     },
-  })
+    onInit: async () => {
+      payload.logger.info('Payload Dev Server Initialized');
+    },
+  });
 
-  if (process.env.PAYLOAD_SEED === 'true') {
-    payload.logger.info('Seeding Payload...')
-    await seed(payload)
-    payload.logger.info('Done.')
-  }
+  // Redirect root to Admin panel
+  expressApp.get('/', (_, res) => {
+    res.redirect('/admin');
+  });
 
-  app.listen(process.env.PORT)
-}
+  const externalRouter = express.Router();
 
-start()
+  // externalRouter.use(payload.authenticate);
+  initRouteAPIV1(expressApp);
+  expressApp.listen(8000, async () => {
+    payload.logger.info(`Admin URL on ${payload.getAdminURL()}`);
+    payload.logger.info(`API URL on ${payload.getAPIURL()}`);
+  });
+};
+
+startDev();

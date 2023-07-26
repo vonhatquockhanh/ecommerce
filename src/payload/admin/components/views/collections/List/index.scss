@@ -1,0 +1,129 @@
+@import '../../../../scss/styles';
+
+.collection-list {
+  width: 100%;
+  margin-bottom: base(2);
+
+  &__wrap {
+    padding-top: $baseline;
+    padding-bottom: $baseline;
+  }
+
+  &__header {
+    margin-bottom: $baseline;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    h1 {
+      margin: 0 base(.75) 0 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .pill {
+      margin: base(.5) 0 base(.25);
+    }
+  }
+
+  &__sub-header {
+    flex-basis: 100%;
+    margin-top: base(.25);
+  }
+
+  .table {
+    table {
+      width: 100%;
+      overflow: auto;
+    }
+  }
+
+  &__page-controls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .paginator {
+    margin-bottom: 0;
+  }
+
+  &__page-info {
+    margin-right: base(1);
+    margin-left: auto;
+  }
+
+  &__shimmer {
+    margin-top: base(1.75);
+  }
+
+  &__shimmer--rows {
+    >div {
+      margin-top: 8px;
+    }
+  }
+
+  &__shimmer--uploads {
+    // match upload cards
+    margin: base(2) -#{base(.5)};
+    width: calc(100% + #{$baseline});
+    display: flex;
+    flex-wrap: wrap;
+
+    >div {
+      min-width: 0;
+      width: calc(16.66%);
+
+      >div {
+        margin: base(.5);
+        padding-bottom: 110%;
+      }
+    }
+  }
+
+  @include mid-break {
+    &__wrap {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    &__header {
+      .pill {
+        margin-bottom: base(.0625);
+      }
+    }
+
+    &__search-input {
+      margin: 0;
+    }
+
+    &__page-controls {
+      flex-wrap: wrap;
+    }
+
+    &__page-info {
+      margin-left: 0;
+    }
+
+    .paginator {
+      width: 100%;
+      margin-bottom: $baseline;
+    }
+
+    &__shimmer--uploads {
+      >div {
+        width: 33.33%;
+      }
+    }
+  }
+
+  @include small-break {
+    &__shimmer--uploads {
+      >div {
+        width: 50%;
+      }
+    }
+  }
+}
