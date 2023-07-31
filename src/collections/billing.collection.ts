@@ -38,4 +38,10 @@ export const BillingCollection: CollectionConfig = {
     }
 
   ],
+  access: {
+    read: () => true,
+    create: () => true,
+    update:  () => true,
+    delete:  () => true,
+  },
 };

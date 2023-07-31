@@ -79,8 +79,9 @@ export const ShipmentCollection: CollectionConfig = {
     },
   ],
   access: {
-    read: ({ req: { user } }) => {
-      return {};
-    },
+    read: () => true,
+    create: () => true,
+    update:  () => true,
+    delete:  () => true,
   },
 };

@@ -82,7 +82,12 @@ export const OrderCollection: CollectionConfig = {
         { name: 'total_price', label: 'Total Price', type: 'number', required: true },
       ],
     },
-
+    { 
+      name: 'payment_status', 
+      label: 'Payment Status', 
+      type: 'checkbox', 
+      defaultValue: false 
+    },    
     {
       name: 'order_date',
       label: 'Order Date',
@@ -90,9 +95,6 @@ export const OrderCollection: CollectionConfig = {
     },
   ],
   access: {
-    // read: ({ req: { user } }) => {
-    // return {};
-    // },
     read: () => true,
     create: () => true,
     update:  () => true,

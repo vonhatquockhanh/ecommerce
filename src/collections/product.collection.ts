@@ -128,25 +128,9 @@ export const ProductCollection: CollectionConfig = {
     },
   ],
   access: {
-    read: ({ req: { user } }) => {
-      // users who are authenticated will see all posts
-      // if (user) {
-      //   return true;
-      // }
-
-      // query publishDate to control when posts are visible to guests
-      return {
-        // and: [
-        //   {
-        //     publishDate: {
-        //       less_than: new Date().toJSON(),
-        //     },
-        //     _status: {
-        //       equals: 'published',
-        //     },
-        //   },
-        // ],
-      };
-    },
+    read: () => true,
+    create: () => true,
+    update:  () => true,
+    delete:  () => true,
   },
 };
