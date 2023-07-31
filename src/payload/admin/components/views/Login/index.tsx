@@ -87,7 +87,18 @@ const Login: React.FC = () => {
             keywords={t('login')}
           />
           <div className={`${baseClass}__brand`}>
-            <Logo />
+            {/* <Logo />  */}
+            <span
+            style={{
+              color: 'black',
+              fontSize: '36px',
+              fontWeight: 'bold',
+              textAlign: 'center',
+              display: 'block',
+            }}
+          >
+            Login Dashboard
+          </span>
           </div>
           {Array.isArray(beforeLogin) && beforeLogin.map((Component, i) => <Component key={i} />)}
           {!collection.auth.disableLocalStrategy && (

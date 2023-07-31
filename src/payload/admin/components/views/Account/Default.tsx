@@ -129,7 +129,7 @@ const DefaultAccount: React.FC<Props> = (props) => {
                         onChange={({ value }) => (i18n.changeLanguage(value))}
                       />
                     </div>
-                    <ToggleTheme />
+                    {/* <ToggleTheme /> */}
                   </Gutter>
                 </div>
               </div>

@@ -22,7 +22,9 @@ const localStorageKey = 'payload-theme';
 
 const getTheme = () => {
   let theme: Theme;
-  const themeFromStorage = window.localStorage.getItem(localStorageKey);
+  // const themeFromStorage = window.localStorage.getItem(localStorageKey);
+
+  const themeFromStorage = 'light';
 
   if (themeFromStorage === 'light' || themeFromStorage === 'dark') {
     theme = themeFromStorage;

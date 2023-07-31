@@ -2,6 +2,7 @@ import { CollectionConfig } from '../payload/collections/config/types';
 import { MediaCollection } from './media.collection';
 import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
+import { VariantCollection } from './variant.collection';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -23,35 +24,62 @@ export const ProductCollection: CollectionConfig = {
       relationTo: MediaCollection.slug,
       required: true,
     },
-    
+
     { name: 'product_total_price', label: 'Product Price', type: 'number', required: true },
     { name: 'product_is_same_price', label: 'Is Same price', type: 'checkbox', defaultValue: true },
 
     // Các trường về tính năng và phân loại sản phẩm
+    // {
+    //   name: 'product_optionality',
+    //   label: 'Product Optionality',
+    //   type: 'array',
+    //   fields: [
+    //     {
+    //       name: 'optional_type',
+    //       label: 'Optional Type',
+    //       type: 'select',
+    //       required: true,
+    //       options: [
+    //         { value: 'color', label: 'Color' },
+    //         { value: 'size', label: 'Size' },
+    //       ],
+    //     },
+    //     {
+    //       name: 'optional_value',
+    //       type: 'text',
+    //       label: 'Optional Value',
+    //       required: true,
+    //     },
+    //     { name: 'price', label: 'Price', type: 'number' },
+    //   ],
+    // },
+
     {
-      name: 'product_optionality',
-      label: 'Product Optionality',
+      name: 'variant',
+      label: 'Variant',
       type: 'array',
+      minRows: 1,
       fields: [
         {
-          name: 'optional_type',
-          label: 'Optional Type',
-          type: 'select',
+          name: 'variant_item',
+          label: 'Variant item',
           required: true,
-          options: [
-            { value: 'color', label: 'Color' },
-            { value: 'size', label: 'Size' },
-          ],
+          type: 'relationship',
+          relationTo: VariantCollection.slug,
         },
-        {
-          name: 'optional_value',
-          type: 'text',
-          label: 'Optional Value',
-          required: true,
-        },
-        { name: 'price', label: 'Price', type: 'number' },
+        // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
+        { name: 'price', label: 'Price', type: 'number', required: true },
       ],
     },
+
+    // {
+    //   name: 'variants',
+    //   label: 'Variants',
+    //   type: 'array', // Sử dụng kiểu dữ liệu "array" cho việc chọn nhiều biến thể
+    //   of: [{ type: 'relationship', relationTo: 'variant', required: true }],
+    //   required: true,
+    // },
+
     {
       name: 'price_by_quantity',
       label: 'Price By Quantity',
@@ -92,11 +120,15 @@ export const ProductCollection: CollectionConfig = {
     { name: 'product_is_sale', label: 'Is Sale', type: 'checkbox', defaultValue: false },
     { name: 'product_sale_price', label: 'Sale Price', type: 'number' },
     { name: 'product_sale_percentage', label: 'Sale Percentage', type: 'number' },
-    { name: 'product_description', label: 'Product Description', type: 'text', admin: { components: { Field: EditorField } } },
+    {
+      name: 'product_description',
+      label: 'Product Description',
+      type: 'text',
+      admin: { components: { Field: EditorField } },
+    },
   ],
   access: {
     read: ({ req: { user } }) => {
-
       // users who are authenticated will see all posts
       // if (user) {
       //   return true;

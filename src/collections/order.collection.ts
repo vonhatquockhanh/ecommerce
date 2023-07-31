@@ -1,11 +1,33 @@
-import { CollectionConfig } from '../payload/collections/config/types';
+// import { populate } from '../hooks/generateFullName.hook';
+import { CollectionConfig, TypeWithID } from '../payload/collections/config/types';
+import { FieldHook } from '../payload/fields/config/types';
+import { VariantCollection } from './variant.collection';
+
+// const calculateTotal: FieldHook = async ({ data }) => {
+//   const quantity = data.quantity || 0;
+//   const total_price = data.total_price || 0;
+
+//   console.log("********************************");
+
+//   // Tính toán giá trị mới cho trường "total"
+//   const total = quantity * total_price;
+
+//   // Trả về giá trị mới để set cho trường "total"
+//   return total;
+// };
 
 export const OrderCollection: CollectionConfig = {
   slug: 'order',
   admin: {
-    useAsTitle: 'account',
+    useAsTitle: 'tracking_number',
   },
   fields: [
+    {
+      name: 'tracking_number',
+      label: 'Tracking Number',
+      type: 'text',
+      required: true,
+    },
     {
       name: 'account',
       label: 'Account',
@@ -20,64 +42,60 @@ export const OrderCollection: CollectionConfig = {
       relationTo: 'product',
       required: true,
     },
-    { name: 'product_total_price', label: 'Product Price', type: 'number', required: true },
 
-    // Các trường về tính năng và phân loại sản phẩm
+    // {
+    //   name: 'quantity',
+    //   label: 'Quantity',
+    //   type: 'number',
+    //   required: true,
+    // },
+    // {
+    //   name: 'total_price',
+    //   label: 'Total Price',
+    //   type: 'number',
+    //   // admin: {
+    //   //   readOnly: true,
+    //   // },
+    // },
+
+    // {
+    //   name: 'total',
+    //   type: 'number',
+    //   hooks: {
+    //     beforeChange: [calculateTotal]
+    //   },
+    // },
+
     {
-      name: 'product_optionality',
-      label: 'Product Optionality',
+      name: 'variant',
+      label: 'Variant',
       type: 'array',
       fields: [
         {
-          name: 'optional_type',
-          label: 'Optional Type',
-          type: 'select',
+          name: 'variant_item',
+          label: 'Variant item',
           required: true,
-          options: [
-            { value: 'color', label: 'Color' },
-            { value: 'size', label: 'Size' },
-          ],
+          type: 'relationship',
+          relationTo: VariantCollection.slug,
         },
-        {
-          name: 'optional_value',
-          type: 'text',
-          label: 'Optional Value',
-          required: true,
-        },
-        {
-          name: 'price',
-          label: 'Price',
-          type: 'number',
-          admin: {
-            readOnly: true,
-          },
-        },
-        {
-          name: 'quantity',
-          label: 'Quantity',
-          type: 'number',
-          required: true,
-        },
+        { name: 'quantity_buy', label: 'Quantity Buy', type: 'number', required: true },
+        { name: 'total_price', label: 'Total Price', type: 'number', required: true },
       ],
     },
-    {
-      name: 'quantity',
-      label: 'Quantity',
-      type: 'number',
-      required: true,
-    },
-    {
-      name: 'total_price',
-      label: 'Total Price',
-      type: 'number',
-      admin: {
-        readOnly: true,
-      },
-    },
+
     {
       name: 'order_date',
       label: 'Order Date',
       type: 'date',
     },
   ],
+  access: {
+    // read: ({ req: { user } }) => {
+    // return {};
+    // },
+    read: () => true,
+    create: () => true,
+    update:  () => true,
+    delete:  () => true,
+  },
 };

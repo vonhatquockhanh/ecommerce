@@ -12,13 +12,15 @@ const RenderTitle: React.FC<Props> = (props) => {
     title: titleFromProps,
     data,
     fallback = '[untitled]',
+    // fallback = '',
   } = props;
   const titleFromForm = useTitle(useAsTitle, collection);
 
   let title = titleFromForm;
   if (!title) title = data?.id;
   if (!title) title = fallback;
-  title = titleFromProps || title;
+
+  title = collection.charAt(0).toUpperCase() + collection.slice(1);
 
   const idAsTitle = title === data?.id;
 
