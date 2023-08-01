@@ -44,3 +44,27 @@ export const getProductByType = async (productType, page = 1, limit = 10) => {
 
   return products;
 };
+
+export const getProductBySectionID = async (sectionId, page = 1, limit = 10) => {
+  const products = await payload.find({
+    collection: 'product',
+    where: { product_sections: { in: sectionId } }, 
+    page: page,
+    limit: limit,
+    sort: "-createdAt"
+  });
+  
+  return products;
+};
+
+export const getProductByProductName = async (productName, page = 1, limit = 10) => {
+  const products = await payload.find({
+    collection: 'product',
+    where: { product_name: { like: productName } }, 
+    page: page,
+    limit: limit,
+    sort: "-createdAt"
+  });
+  
+  return products;
+};

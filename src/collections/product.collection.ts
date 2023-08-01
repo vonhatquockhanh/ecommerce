@@ -3,6 +3,7 @@ import { MediaCollection } from './media.collection';
 import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
 import { VariantCollection } from './variant.collection';
+import { ProductSectionCollection } from './product-section.collection';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -115,9 +116,19 @@ export const ProductCollection: CollectionConfig = {
     { name: 'product_tags', label: 'Product Tags', type: 'text' },
 
     // Các trường liên quan đến các tính năng khác của sản phẩm
-    { name: 'product_is_featured', label: 'Is Featured', type: 'checkbox', defaultValue: false },
-    { name: 'product_is_new', label: 'Is New', type: 'checkbox', defaultValue: false },
-    { name: 'product_is_sale', label: 'Is Sale', type: 'checkbox', defaultValue: false },
+    // { name: 'product_is_featured', label: 'Is Featured', type: 'checkbox', defaultValue: false },
+    // { name: 'product_is_new', label: 'Is New', type: 'checkbox', defaultValue: false },
+    // { name: 'product_is_sale', label: 'Is Sale', type: 'checkbox', defaultValue: false },
+
+    {
+      name: 'product_sections',
+      label: 'Product Section',
+      type: 'relationship',
+      relationTo: ProductSectionCollection.slug,
+      required: true,
+      hasMany: true,
+    },
+
     { name: 'product_sale_price', label: 'Sale Price', type: 'number' },
     { name: 'product_sale_percentage', label: 'Sale Percentage', type: 'number' },
     {

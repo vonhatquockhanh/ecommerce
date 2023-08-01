@@ -19,8 +19,9 @@ export const CategoriesCollection: CollectionConfig = {
     { name: 'category_image', label: 'Category Image', type: 'upload', relationTo: MediaCollection.slug },
   ],
   access: {
-    read: ({ req: { user } }) => {
-      return {};
-    },
+    read: () => true,
+    create: () => true,
+    update:  () => true,
+    delete:  () => true,
   },
 };

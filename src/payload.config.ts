@@ -10,6 +10,7 @@ import { OrderCollection } from './collections/order.collection';
 import { VariantCollection } from './collections/variant.collection';
 import { ShipmentCollection } from './collections/shipment.collection';
 import { BillingCollection } from './collections/billing.collection';
+import { ProductSectionCollection } from './collections/product-section.collection';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 const categoryService = path.resolve(__dirname, './services/category.service');
@@ -23,6 +24,7 @@ export default buildConfig({
   cors: cors,
   collections: [
     VariantCollection,
+    ProductSectionCollection,
     ProductCollection,
     CategoriesCollection,
     MediaCollection,
