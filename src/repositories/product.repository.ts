@@ -83,6 +83,31 @@ export const getProductBySectionID = async (sectionId, page = 1, limit = 10) => 
   return products;
 };
 
+export const getProductSectionV1 = async (page = 1, limit = 10) => {
+  const productSections = await payload.find({
+    collection: 'product_sections',
+    page: page,
+    limit: limit,
+    sort: "-createdAt"
+  });
+  
+  if (productSections && productSections?.docs?.length) {
+    // loop through
+    for (let i = 0; i < productSections?.docs?.length; i++) {
+      let itemProductSections = productSections?.docs[i];
+
+      const productInfo = await payload.find({
+        collection: 'product',
+        where: { product_sections: { equals: itemProductSections?.id } },
+      });
+
+      itemProductSections.totalProducts = productInfo?.docs?.length ?? 0;
+    }
+  }
+  
+  return productSections;
+};
+
 export const getProductByProductName = async (productName, page = 1, limit = 10) => {
   const products = await payload.find({
     collection: 'product',
