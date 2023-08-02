@@ -13,6 +13,32 @@ export const getProductByCategorieID = async (categorieId, page = 1, limit = 10)
   return products;
 };
 
+export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 10) => {
+  const categories = await payload.find({
+    collection: 'categories',
+    where: {
+      or: [
+        { parent_categories: { equals: categorieId } },
+        { _id: { equals: categorieId } }
+      ],
+    },
+  });
+
+  if (categories && categories?.docs?.length) {
+    const products = await payload.find({
+      collection: 'product',
+      where: { product_categories: { in: categories.docs.map(x => x.id) } }, 
+      page: page,
+      limit: limit,
+      sort: "-createdAt"
+    });
+
+    return products;
+  }
+  
+  return null;
+};
+
 export const getProductByType = async (productType, page = 1, limit = 10) => {
   let products;
 

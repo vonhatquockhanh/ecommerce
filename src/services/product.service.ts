@@ -1,7 +1,21 @@
-import { getProductByCategorieID, getProductByType, getProductBySectionID, getProductByProductName } from '../repositories/product.repository';
+import {
+  getProductByCategorieID,
+  getProductByType,
+  getProductBySectionID,
+  getProductByProductName,
+  getProductByCategorieIDV2
+} from '../repositories/product.repository';
 
 export const getProductByCategorieIDService = async (categorieId, page = 1, limit = 10) => {
   const prod = await getProductByCategorieID(categorieId, page, limit);
+  if (prod.docs.length < 1) {
+    return null;
+  }
+  return prod;
+};
+
+export const getProductByCategorieIDV2Service = async (categorieId, page = 1, limit = 10) => {
+  const prod = await getProductByCategorieIDV2(categorieId, page, limit);
   if (prod.docs.length < 1) {
     return null;
   }
@@ -31,4 +45,3 @@ export const getProductByProductNameService = async (productName, page = 1, limi
   }
   return prod;
 };
-
