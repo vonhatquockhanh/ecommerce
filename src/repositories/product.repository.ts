@@ -1,15 +1,16 @@
+import mongoose from 'mongoose';
 import { ProductType } from '../const/product.enum';
 import payload from '../payload';
 
 export const getProductByCategorieID = async (categorieId, page = 1, limit = 10) => {
   const products = await payload.find({
     collection: 'product',
-    where: { product_categories: { in: categorieId } }, 
+    where: { product_categories: { in: categorieId } },
     page: page,
     limit: limit,
-    sort: "-createdAt"
+    sort: '-createdAt',
   });
-  
+
   return products;
 };
 
@@ -17,26 +18,68 @@ export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 1
   const categories = await payload.find({
     collection: 'categories',
     where: {
-      or: [
-        { parent_categories: { equals: categorieId } },
-        { _id: { equals: categorieId } }
-      ],
+      or: [{ parent_categories: { equals: categorieId } }, { _id: { equals: categorieId } }],
     },
   });
 
   if (categories && categories?.docs?.length) {
     const products = await payload.find({
       collection: 'product',
-      where: { product_categories: { in: categories.docs.map(x => x.id) } }, 
+      where: { product_categories: { in: categories.docs.map(x => x.id) } },
       page: page,
       limit: limit,
-      sort: "-createdAt"
+      sort: '-createdAt',
     });
 
     return products;
   }
-  
+
   return null;
+};
+
+export const getProductByListCategorieID = async (categorieIds, page = 1, limit = 10) => {
+  if (!categorieIds || categorieIds.trim() === '' || categorieIds.trim() === '[]') {
+    return {
+      docs: [],
+    };
+  }
+
+  const temp = categorieIds
+    .slice(1, -1)
+    .split(',')
+    .map(id => id.trim());
+
+  // list categories ids
+  const _idArray = temp.map(id => new mongoose.Types.ObjectId(id));
+
+  if (_idArray && _idArray.length) {
+    const categories = await payload.find({
+      collection: 'categories',
+      where: {
+        or: [{ parent_categories: { in: _idArray } }, { _id: { in: _idArray } }],
+      },
+    });
+
+    if (categories && categories?.docs?.length) {
+      const products = await payload.find({
+        collection: 'product',
+        where: { product_categories: { in: categories.docs.map(x => x.id) } },
+        page: page,
+        limit: limit,
+        sort: '-createdAt',
+      });
+
+      return products;
+    }
+
+    return {
+      docs: [],
+    };
+  }
+
+  return {
+    docs: [],
+  };
 };
 
 export const getProductByType = async (productType, page = 1, limit = 10) => {
@@ -48,7 +91,7 @@ export const getProductByType = async (productType, page = 1, limit = 10) => {
       where: { product_is_new: { equals: true } },
       page: page,
       limit: limit,
-      sort: "-createdAt"
+      sort: '-createdAt',
     });
   } else if (productType === ProductType.FEATURED) {
     products = await payload.find({
@@ -56,7 +99,7 @@ export const getProductByType = async (productType, page = 1, limit = 10) => {
       where: { product_is_featured: { equals: true } },
       page: page,
       limit: limit,
-      sort: "-createdAt"
+      sort: '-createdAt',
     });
   } else if (productType === ProductType.SALE) {
     products = await payload.find({
@@ -64,7 +107,7 @@ export const getProductByType = async (productType, page = 1, limit = 10) => {
       where: { product_is_sale: { equals: true } },
       page: page,
       limit: limit,
-      sort: "-createdAt"
+      sort: '-createdAt',
     });
   }
 
@@ -74,12 +117,12 @@ export const getProductByType = async (productType, page = 1, limit = 10) => {
 export const getProductBySectionID = async (sectionId, page = 1, limit = 10) => {
   const products = await payload.find({
     collection: 'product',
-    where: { product_sections: { in: sectionId } }, 
+    where: { product_sections: { in: sectionId } },
     page: page,
     limit: limit,
-    sort: "-createdAt"
+    sort: '-createdAt',
   });
-  
+
   return products;
 };
 
@@ -88,9 +131,9 @@ export const getProductSectionV1 = async (page = 1, limit = 10) => {
     collection: 'product_sections',
     page: page,
     limit: limit,
-    sort: "-createdAt"
+    sort: '-createdAt',
   });
-  
+
   if (productSections && productSections?.docs?.length) {
     // loop through
     for (let i = 0; i < productSections?.docs?.length; i++) {
@@ -104,18 +147,74 @@ export const getProductSectionV1 = async (page = 1, limit = 10) => {
       itemProductSections.totalProducts = productInfo?.docs?.length ?? 0;
     }
   }
-  
+
   return productSections;
 };
 
 export const getProductByProductName = async (productName, page = 1, limit = 10) => {
   const products = await payload.find({
     collection: 'product',
-    where: { product_name: { like: productName } }, 
+    where: { product_name: { like: productName } },
     page: page,
     limit: limit,
-    sort: "-createdAt"
+    sort: '-createdAt',
   });
-  
+
+  return products;
+};
+
+export const getSuitableProductForUser = async (productIds, page = 1, limit = 10) => {
+  if (!productIds || productIds.trim() === '' || productIds.trim() === '[]') {
+    return {
+      docs: [],
+    };
+  }
+
+  const temp = productIds
+    .slice(1, -1)
+    .split(',')
+    .map(id => id.trim());
+
+  const _idArray = temp.map(id => new mongoose.Types.ObjectId(id));
+
+  const productOfUseViewDetail = await payload.find({
+    collection: 'product',
+    where: { _id: { in: _idArray } },
+  });
+
+  if (productOfUseViewDetail.docs.length === 0) {
+    return {
+      docs: [],
+    };
+  }
+
+  const productCategoriesArray = [];
+
+  for (const productItem of productOfUseViewDetail.docs) {
+    const productCategories = productItem.product_categories as any[];
+    if (productCategories.length > 0) {
+      for (const categoryItem of productCategories) {
+        productCategoriesArray.push(categoryItem.id);
+      }
+    }
+  }
+
+  const products = await payload.find({
+    collection: 'product',
+    where: {
+      and: [
+        {
+          _id: { not_in: _idArray },
+        },
+        {
+          product_categories: { in: productCategoriesArray },
+        }
+      ],
+    },
+    page: page,
+    limit: limit,
+    sort: '-createdAt',
+  });
+
   return products;
 };

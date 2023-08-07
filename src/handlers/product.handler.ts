@@ -4,7 +4,9 @@ import {
   getProductBySectionIDService,
   getProductByProductNameService,
   getProductByCategorieIDV2Service,
-  getProductSectionV1Service
+  getProductSectionV1Service,
+  getSuitableProductForUserService,
+  getProductByListCategorieIDService
 } from '../services/product.service';
 
 export const getProductByCategorieIDHandler = async (req, res) => {
@@ -25,6 +27,21 @@ export const getProductByCategorieIDHandler = async (req, res) => {
 export const getProductByCategorieIDV2Handler = async (req, res) => {
   try {
     const posts = await getProductByCategorieIDV2Service(req.params.categorieId, req.query.page, req.query.limit);
+    if (!posts) {
+      const body = { errors: [{ message: 'Not Found' }] };
+      return res.status(404).json(body).end();
+    }
+
+    return res.status(200).json(posts).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Error! An error occurred. Please try again later' }).end();
+  }
+};
+
+export const getProductByListCategorieIDHandler = async (req, res) => {
+  try {
+    const posts = await getProductByListCategorieIDService(req.query.categorieIds, req.query.page, req.query.limit);
     if (!posts) {
       const body = { errors: [{ message: 'Not Found' }] };
       return res.status(404).json(body).end();
@@ -85,6 +102,21 @@ export const getProductByProductNameHandler = async (req, res) => {
 export const getProductSectionV1Handler = async (req, res) => {
   try {
     const posts = await getProductSectionV1Service(req.query.page, req.query.limit);
+    if (!posts) {
+      const body = { errors: [{ message: 'Not Found' }] };
+      return res.status(404).json(body).end();
+    }
+
+    return res.status(200).json(posts).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Error! An error occurred. Please try again later' }).end();
+  }
+};
+
+export const getSuitableProductForUserHandler = async (req, res) => {
+  try {
+    const posts = await getSuitableProductForUserService(req.query.productIds, req.query.page, req.query.limit);
     if (!posts) {
       const body = { errors: [{ message: 'Not Found' }] };
       return res.status(404).json(body).end();

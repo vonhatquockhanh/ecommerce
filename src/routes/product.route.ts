@@ -4,6 +4,8 @@ import {
   getProductBySectionIDHandler,
   getProductByProductNameHandler,
   getProductSectionV1Handler,
+  getSuitableProductForUserHandler,
+  getProductByListCategorieIDHandler
 } from '../handlers/product.handler';
 
 const express = require('express');
@@ -11,6 +13,10 @@ const router = express.Router();
 
 router.get('/products/categorieId/:categorieId', async function (_, res) {
   return await getProductByCategorieIDHandler(_, res);
+});
+
+router.get('/products/getProductByListCategorieID', async function (_, res) {
+  return await getProductByListCategorieIDHandler(_, res);
 });
 
 router.get('/products/productType/:productType', async function (_, res) {
@@ -27,6 +33,10 @@ router.get('/product_sections', async function (_, res) {
 
 router.get('/products', async function (_, res) {
   return await getProductByProductNameHandler(_, res);
+});
+
+router.get('/products/suitableProductForUser', async function (_, res) {
+  return await getSuitableProductForUserHandler(_, res);
 });
 
 export default router;

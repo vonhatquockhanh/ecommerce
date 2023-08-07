@@ -111,7 +111,7 @@ const Auth: React.FC<Props> = (props) => {
               {t('changePassword')}
             </Button>
           )}
-          {operation === 'update' && (
+          {/* {operation === 'update' && (
             <Button
               size="small"
               buttonStyle="secondary"
@@ -119,7 +119,7 @@ const Auth: React.FC<Props> = (props) => {
             >
               {t('forceUnlock')}
             </Button>
-          )}
+          )} */}
         </React.Fragment>
       )}
       {useAPIKey && (

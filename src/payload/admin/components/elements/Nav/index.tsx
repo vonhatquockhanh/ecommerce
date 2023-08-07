@@ -16,6 +16,8 @@ import { groupNavItems, Group, EntityToGroup, EntityType } from '../../../utilit
 import { getTranslation } from '../../../../utilities/getTranslation';
 
 import './index.scss';
+import LanguageChina from '../../graphics/LanguageChina';
+import LanguageVietNam from '../../graphics/LanguageVietNam';
 
 const baseClass = 'nav';
 
@@ -74,23 +76,12 @@ const DefaultNav = () => {
     <aside className={classes}>
       <div className={`${baseClass}__scroll`}>
         <header>
-          <Link
-            to={admin}
-            className={`${baseClass}__brand`}
-          >
+          <Link to={admin} className={`${baseClass}__brand`}>
             <Icon />
           </Link>
-          <button
-            type="button"
-            className={`${baseClass}__mobile-menu-btn`}
-            onClick={() => setMenuActive(!menuActive)}
-          >
-            {menuActive && (
-              <CloseMenu />
-            )}
-            {!menuActive && (
-              <Menu />
-            )}
+          <button type="button" className={`${baseClass}__mobile-menu-btn`} onClick={() => setMenuActive(!menuActive)}>
+            {menuActive && <CloseMenu />}
+            {!menuActive && <Menu />}
           </button>
         </header>
         <nav className={`${baseClass}__wrap`}>
@@ -116,13 +107,7 @@ const DefaultNav = () => {
                   }
 
                   return (
-                    <NavLink
-                      id={id}
-                      className={`${baseClass}__link`}
-                      activeClassName="active"
-                      key={i}
-                      to={href}
-                    >
+                    <NavLink id={id} className={`${baseClass}__link`} activeClassName="active" key={i} to={href}>
                       <Chevron />
                       {entityLabel}
                     </NavLink>
@@ -134,10 +119,18 @@ const DefaultNav = () => {
           {Array.isArray(afterNavLinks) && afterNavLinks.map((Component, i) => <Component key={i} />)}
           <div className={`${baseClass}__controls`}>
             <Localizer />
-            <Link
-              to={`${admin}/account`}
-              className={`${baseClass}__account`}
-            >
+
+            <div>
+              <Link to={`#`} className={`${baseClass}__account`}>
+                <LanguageChina />
+              </Link>
+              
+              <Link to={`#`} className={`${baseClass}__account`}>
+                <LanguageVietNam />
+              </Link>
+            </div>
+
+            <Link to={`${admin}/account`} className={`${baseClass}__account`}>
               <Account />
             </Link>
             <Logout />
