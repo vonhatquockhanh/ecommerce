@@ -11,16 +11,22 @@ import { VariantCollection } from './collections/variant.collection';
 import { ShipmentCollection } from './collections/shipment.collection';
 import { BillingCollection } from './collections/billing.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
+import dotenv from 'dotenv';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 const categoryService = path.resolve(__dirname, './services/category.service');
 const productService = path.resolve(__dirname, './services/product.service');
 
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+});
+
 let cors = ['http://103.162.20.221:3000', 'http://localhost:8080'];
 
 export default buildConfig({
   // serverURL: 'http://localhost:8000',
-  serverURL: 'https://admin.supply.aeyes.vn',
+  // serverURL: 'https://admin.supply.aeyes.vn',
+  serverURL: process.env.DOMAIN_URL,
   cors: cors,
   collections: [
     VariantCollection,

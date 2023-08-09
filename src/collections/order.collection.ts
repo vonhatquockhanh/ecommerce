@@ -29,11 +29,39 @@ export const OrderCollection: CollectionConfig = {
       required: true,
     },
     {
-      name: 'account',
-      label: 'Account',
-      type: 'relationship',
-      relationTo: 'account',
-      required: true,
+      name: 'userId',
+      label: 'userId',
+      type: 'text',
+      admin: {
+        disabled: true
+      }
+    },
+    // {
+    //   name: 'account',
+    //   label: 'Account',
+    //   type: 'relationship',
+    //   relationTo: 'account',
+    //   required: true,
+    // },
+    {
+      name: 'first_name',
+      label: 'First Name',
+      type: 'text',
+    },
+    {
+      name: 'last_name',
+      label: 'Last Name',
+      type: 'text',
+    },
+    {
+      name: 'email',
+      label: 'email',
+      type: 'text',
+    },
+    {
+      name: 'phone',
+      label: 'phone',
+      type: 'text',
     },
     {
       name: 'product',
@@ -82,6 +110,16 @@ export const OrderCollection: CollectionConfig = {
         { name: 'total_price', label: 'Total Price', type: 'number', required: true },
       ],
     },
+
+     {
+      name: 'total_price',
+      label: 'Total Price',
+      type: 'number',
+      admin: {
+        readOnly: true,
+      },
+    },
+
     { 
       name: 'payment_status', 
       label: 'Payment Status', 

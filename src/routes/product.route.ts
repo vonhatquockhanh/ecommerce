@@ -5,7 +5,7 @@ import {
   getProductByProductNameHandler,
   getProductSectionV1Handler,
   getSuitableProductForUserHandler,
-  getProductByListCategorieIDHandler
+  getProductByListCategorieIDHandler,
 } from '../handlers/product.handler';
 
 const express = require('express');

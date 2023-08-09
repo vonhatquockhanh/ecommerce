@@ -16,6 +16,7 @@ export const CategoriesCollection: CollectionConfig = {
     },
     { name: 'category_name', label: 'Category Name', type: 'text', required: true },
     { name: 'category_description', label: 'Category Description', type: 'textarea' },
+    { name: 'category_color', label: 'Category Color', type: 'text' },
     { name: 'category_image', label: 'Category Image', type: 'upload', relationTo: MediaCollection.slug },
   ],
   access: {
