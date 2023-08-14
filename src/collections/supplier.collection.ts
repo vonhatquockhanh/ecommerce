@@ -1,4 +1,5 @@
 import { isAdmin } from '../access/admins';
+import { isSupplier } from '../access/supplier';
 import { CollectionConfig } from '../payload/collections/config/types';
 
 export const SupplierCollection: CollectionConfig = {
@@ -17,4 +18,10 @@ export const SupplierCollection: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
+  // access: {
+  //   read: () => true,
+  //   create: () => true,
+  //   update: () => true,
+  //   delete: () => true,
+  // },
 };
