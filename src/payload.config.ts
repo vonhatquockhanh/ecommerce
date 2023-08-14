@@ -10,6 +10,7 @@ import { OrderCollection } from './collections/order.collection';
 import { VariantCollection } from './collections/variant.collection';
 import { ShipmentCollection } from './collections/shipment.collection';
 import { BillingCollection } from './collections/billing.collection';
+import { ImportProductCollection } from './collections/import-product.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
 import dotenv from 'dotenv';
 
@@ -32,6 +33,7 @@ export default buildConfig({
     VariantCollection,
     ProductSectionCollection,
     ProductCollection,
+    ImportProductCollection,
     CategoriesCollection,
     MediaCollection,
     // UserCollection,
