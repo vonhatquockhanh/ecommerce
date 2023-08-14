@@ -85,30 +85,6 @@ export const OrderCollection: CollectionConfig = {
       relationTo: 'product',
       required: true,
     },
-
-    // {
-    //   name: 'quantity',
-    //   label: 'Quantity',
-    //   type: 'number',
-    //   required: true,
-    // },
-    // {
-    //   name: 'total_price',
-    //   label: 'Total Price',
-    //   type: 'number',
-    //   // admin: {
-    //   //   readOnly: true,
-    //   // },
-    // },
-
-    // {
-    //   name: 'total',
-    //   type: 'number',
-    //   hooks: {
-    //     beforeChange: [calculateTotal]
-    //   },
-    // },
-
     {
       name: 'variant',
       label: 'Variant',
@@ -145,6 +121,10 @@ export const OrderCollection: CollectionConfig = {
       name: 'order_date',
       label: 'Order Date',
       type: 'date',
+      defaultValue: new Date().toISOString(),
+      admin: {
+        hidden: true,
+      }
     },
     {
       name: 'supplierId',
