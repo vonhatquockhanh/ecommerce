@@ -28,7 +28,7 @@ export const OrderCollection: CollectionConfig = {
     beforeChange: [
       ({ req, operation, data }) => {
         if (operation === 'create') {
-          if (req.user) {
+          if (req.user && req.user.role === 'supplier') {
             data.supplierId = req.user.supplier.id;
             return data;
           }
@@ -71,7 +71,7 @@ export const OrderCollection: CollectionConfig = {
     {
       name: 'email',
       label: 'email',
-      type: 'text',
+      type: 'email',
     },
     {
       name: 'phone',
@@ -130,14 +130,15 @@ export const OrderCollection: CollectionConfig = {
       name: 'supplierId',
       type: 'relationship',
       relationTo: SupplierCollection.slug,
+      // required: true,
       access: {
-        update: () => false,
-        read: isAdmin
+        update: isAdmin,
+        read: isAdmin,
+        create: isAdmin,
       },
       admin: {
-        readOnly: true,
+        readOnly: false,
         position: 'sidebar',
-        condition: data => Boolean(data?.supplierId),
       },
     },
   ],
