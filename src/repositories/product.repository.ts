@@ -218,3 +218,14 @@ export const getSuitableProductForUser = async (productIds, page = 1, limit = 10
 
   return products;
 };
+
+export const getProductByID = async (productId) => {
+  const products = await payload.findByID({
+    collection: 'product',
+    id: productId
+  });
+
+  console.log(products)
+
+  return products;
+};

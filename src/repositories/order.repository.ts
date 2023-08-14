@@ -17,22 +17,36 @@ export const createOrder = async (token, data) => {
       totalPrice += item.total_price * item.quantity_buy;
     });
 
+    // supplierId
+    let supplierId;
+
+    if (data && data?.product) {
+      const productInfo:any = await payload.findByID({
+        collection: 'product',
+        id: data?.product,
+      });
+
+      supplierId = productInfo?.supplierId?.id;
+    }
+
     const bodyInput = Object.assign(data, {
       userId: profileUser?.data?._id,
       first_name: profileUser?.data?.first_name,
       last_name: profileUser?.data?.last_name,
       email: profileUser?.data?.email,
       phone: profileUser?.data?.phone,
+      supplierId: supplierId,
       total_price: totalPrice,
     });
 
     await payload.create({
       collection: 'order',
-      data: bodyInput,
+      data: bodyInput
     });
 
     return { success: true };
   } catch (error) {
+    console.log(error)
     return null;
   }
 };

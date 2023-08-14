@@ -8,6 +8,7 @@ export const createOrderHandler = async (req, res) => {
       const token = headers.authorization.split(' ')[1];
 
       const order = await createOrderService(token, req.body.data);
+
       if (!order) {
         const body = { errors: [{ message: 'Not Found' }] };
         return res.status(404).json(body).end();

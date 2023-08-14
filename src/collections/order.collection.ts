@@ -71,7 +71,8 @@ export const OrderCollection: CollectionConfig = {
     {
       name: 'email',
       label: 'email',
-      type: 'email',
+      type: 'text',
+      unique: false,
     },
     {
       name: 'phone',
