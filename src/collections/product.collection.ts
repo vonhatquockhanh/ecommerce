@@ -4,7 +4,10 @@ import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
 import { VariantCollection } from './variant.collection';
 import { ProductSectionCollection } from './product-section.collection';
-import { isAdminOrCreatedBySupplier } from '../access/supplier';
+import { isAdminOrCreatedBySupplier, isAdminOrCreatedBySupplierProduct } from '../access/supplier';
+import { UserCollection } from './user.colection';
+import { SupplierCollection } from './supplier.collection';
+import { isAdmin } from '../access/admins';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -152,21 +155,22 @@ export const ProductCollection: CollectionConfig = {
     {
       name: 'supplierId',
       type: 'relationship',
-      relationTo: 'users',
+      relationTo: SupplierCollection.slug,
       access: {
         update: () => false,
+        read: isAdmin,
       },
       admin: {
         readOnly: true,
         position: 'sidebar',
-        condition: data => Boolean(data?.createdBy)
+        condition: data => Boolean(data?.supplierId),
       },
     },
   ],
   access: {
-    read: isAdminOrCreatedBySupplier,
-    create: isAdminOrCreatedBySupplier,
-    update: isAdminOrCreatedBySupplier,
-    delete: isAdminOrCreatedBySupplier,
+    read: isAdminOrCreatedBySupplierProduct,
+    create: isAdminOrCreatedBySupplierProduct,
+    update: isAdminOrCreatedBySupplierProduct,
+    delete: isAdminOrCreatedBySupplierProduct,
   },
 };

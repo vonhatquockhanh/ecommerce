@@ -1,6 +1,9 @@
 // import { populate } from '../hooks/generateFullName.hook';
+import { isAdmin, isAdminOrCreatedBy } from '../access/admins';
+import { isAdminOrCreatedBySupplier } from '../access/supplier';
 import { CollectionConfig, TypeWithID } from '../payload/collections/config/types';
 import { FieldHook } from '../payload/fields/config/types';
+import { SupplierCollection } from './supplier.collection';
 import { VariantCollection } from './variant.collection';
 
 // const calculateTotal: FieldHook = async ({ data }) => {
@@ -20,6 +23,18 @@ export const OrderCollection: CollectionConfig = {
   slug: 'order',
   admin: {
     useAsTitle: 'tracking_number',
+  },
+  hooks: {
+    beforeChange: [
+      ({ req, operation, data }) => {
+        if (operation === 'create') {
+          if (req.user) {
+            data.supplierId = req.user.supplier.id;
+            return data;
+          }
+        }
+      },
+    ],
   },
   fields: [
     {
@@ -125,17 +140,36 @@ export const OrderCollection: CollectionConfig = {
       label: 'Payment Status', 
       type: 'checkbox', 
       defaultValue: false 
-    },    
+    },
     {
       name: 'order_date',
       label: 'Order Date',
       type: 'date',
     },
+    {
+      name: 'supplierId',
+      type: 'relationship',
+      relationTo: SupplierCollection.slug,
+      access: {
+        update: () => false,
+        read: isAdmin
+      },
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        condition: data => Boolean(data?.supplierId),
+      },
+    },
   ],
+  // access: {
+  //   read: isAdminOrCreatedBySupplier,
+  //   update: isAdminOrCreatedBySupplier,
+  //   delete: isAdminOrCreatedBySupplier,
+  // },
   access: {
-    read: () => true,
-    create: () => true,
-    update:  () => true,
-    delete:  () => true,
+    read: isAdminOrCreatedBySupplier,
+    create: isAdminOrCreatedBySupplier,
+    update: isAdminOrCreatedBySupplier,
+    delete: isAdminOrCreatedBySupplier,
   },
 };

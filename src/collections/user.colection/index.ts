@@ -46,4 +46,10 @@ export const UserCollection: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
+  // access: {
+  //   read: () => true,
+  //   create: () => true,
+  //   update: () => true,
+  //   delete: () => true,
+  // },
 };
