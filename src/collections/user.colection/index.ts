@@ -37,7 +37,7 @@ export const UserCollection: CollectionConfig = {
       label: 'Supplier',
       type: 'relationship',
       relationTo: SupplierCollection.slug,
-      required: true,
+      required: false,
     },
   ],
   access: {

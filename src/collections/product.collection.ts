@@ -82,6 +82,7 @@ export const ProductCollection: CollectionConfig = {
         },
         // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
         { name: 'price', label: 'Price', type: 'number', required: true },
+        { name: 'stock', label: 'Stock', type: 'number', required: false },
       ],
     },
 
