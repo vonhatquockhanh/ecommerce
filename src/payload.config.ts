@@ -1,16 +1,15 @@
 import { buildConfig } from './payload/config/build';
 import { MediaCollection } from './collections/media.collection';
-// import { UserCollection } from './collections/user.collection';
-// import { AdminCollection } from './collections/admin.collection';
 import { ProductCollection } from './collections/product.collection';
 import { CategoriesCollection } from './collections/categories.collection';
 import path from 'path'
-import { AccountCollection } from './collections/account.collection';
+import { UserCollection } from './collections/user.colection';
 import { OrderCollection } from './collections/order.collection';
 import { VariantCollection } from './collections/variant.collection';
 import { ShipmentCollection } from './collections/shipment.collection';
 import { BillingCollection } from './collections/billing.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
+import { SupplierCollection } from './collections/supplier.collection';
 import dotenv from 'dotenv';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
@@ -34,12 +33,11 @@ export default buildConfig({
     ProductCollection,
     CategoriesCollection,
     MediaCollection,
-    // UserCollection,
-    // AdminCollection,
     OrderCollection,
     ShipmentCollection,
     BillingCollection,
-    AccountCollection,
+    SupplierCollection,
+    UserCollection,
   ],
   admin: {
     webpack: config => {

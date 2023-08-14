@@ -4,6 +4,7 @@ import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
 import { VariantCollection } from './variant.collection';
 import { ProductSectionCollection } from './product-section.collection';
+import { isAdminOrCreatedBySupplier } from '../access/supplier';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -13,7 +14,18 @@ export const ProductCollection: CollectionConfig = {
   },
 
   labels: { singular: 'Product', plural: 'Product' },
-
+  hooks: {
+    beforeChange: [
+      ({ req, operation, data }) => {
+        if (operation === 'create') {
+          if (req.user) {
+            data.supplierId = req.user.supplier.id;
+            return data;
+          }
+        }
+      },
+    ],
+  },
   fields: [
     // Đặt các trường bắt buộc (required) trước
     { name: 'product_name', label: 'Product Name', type: 'text', required: true },
@@ -137,11 +149,24 @@ export const ProductCollection: CollectionConfig = {
       type: 'text',
       admin: { components: { Field: EditorField } },
     },
+    {
+      name: 'supplierId',
+      type: 'relationship',
+      relationTo: 'users',
+      access: {
+        update: () => false,
+      },
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        condition: data => Boolean(data?.createdBy)
+      },
+    },
   ],
   access: {
-    read: () => true,
-    create: () => true,
-    update:  () => true,
-    delete:  () => true,
+    read: isAdminOrCreatedBySupplier,
+    create: isAdminOrCreatedBySupplier,
+    update: isAdminOrCreatedBySupplier,
+    delete: isAdminOrCreatedBySupplier,
   },
 };
