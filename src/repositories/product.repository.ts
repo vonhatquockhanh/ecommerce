@@ -225,7 +225,29 @@ export const getProductByID = async (productId) => {
     id: productId
   });
 
-  console.log(products)
-
   return products;
+};
+
+
+export const getAllProducts = async (productName, page = 1, limit = 10) => {
+  if (productName) {
+    const products = await payload.find({
+      collection: 'product',
+      where: { product_name: { like: productName } },
+      page: page,
+      limit: limit,
+      sort: '-createdAt',
+    });
+
+    return products;
+  } else {
+    const products = await payload.find({
+      collection: 'product',
+      page: page,
+      limit: limit,
+      sort: '-createdAt',
+    });
+
+    return products;
+  }
 };

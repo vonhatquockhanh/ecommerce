@@ -7,7 +7,8 @@ import {
   getProductSectionV1,
   getSuitableProductForUser,
   getProductByListCategorieID,
-  getProductByID
+  getProductByID,
+  getAllProducts
 } from '../repositories/product.repository';
 
 export const getProductByCategorieIDService = async (categorieId, page = 1, limit = 10) => {
@@ -76,4 +77,12 @@ export const getProductByListCategorieIDService = async (categorieIds, page = 1,
 
 export const getProductByIDService = async (productId) => {
   return await getProductByID(productId);
+};
+
+export const getAllProductsService = async (productName, page = 1, limit = 10) => {
+  const prod = await getAllProducts(productName, page, limit);
+  if (prod.docs.length < 1) {
+    return null;
+  }
+  return prod;
 };

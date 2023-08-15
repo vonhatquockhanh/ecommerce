@@ -7,7 +7,8 @@ import {
   getProductSectionV1Service,
   getSuitableProductForUserService,
   getProductByListCategorieIDService,
-  getProductByIDService
+  getProductByIDService,
+  getAllProductsService
 } from '../services/product.service';
 
 export const getProductByCategorieIDHandler = async (req, res) => {
@@ -133,6 +134,21 @@ export const getSuitableProductForUserHandler = async (req, res) => {
 export const getProductByIDHandler = async (req, res) => {
   try {
     const posts = await getProductByIDService(req.params.productId);
+    if (!posts) {
+      const body = { errors: [{ message: 'Not Found' }] };
+      return res.status(404).json(body).end();
+    }
+
+    return res.status(200).json(posts).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: 'Error! An error occurred. Please try again later' }).end();
+  }
+};
+
+export const getAllProductsHandler = async (req, res) => {
+  try {
+    const posts = await getAllProductsService(req.query?.productName, req.query.page, req.query.limit);
     if (!posts) {
       const body = { errors: [{ message: 'Not Found' }] };
       return res.status(404).json(body).end();
