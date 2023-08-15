@@ -815,6 +815,9 @@
         },
         "welcome": {
           "type": "string"
+        },
+        "login": {
+          "type": "string"
         }
       },
       "required": [

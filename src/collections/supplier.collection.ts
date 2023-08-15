@@ -1,23 +1,24 @@
 import { isAdmin } from '../access/admins';
 import { isSupplier } from '../access/supplier';
 import { CollectionConfig } from '../payload/collections/config/types';
+import { SUPPLIER_TRANSLATION } from '../translate';
 import { MediaCollection } from './media.collection';
 
 export const SupplierCollection: CollectionConfig = {
   slug: 'supplier',
-  labels: { singular: 'Supplier', plural: 'Supplier' },
+  labels: { singular: SUPPLIER_TRANSLATION.supplier, plural: SUPPLIER_TRANSLATION.supplier },
   admin: {
     useAsTitle: 'supplier_name',
   },
   fields: [
-    { name: 'supplier_name', label: 'Supplier name', type: 'text', required: true },
+    { name: 'supplier_name', label: SUPPLIER_TRANSLATION.supplier_name, type: 'text', required: true },
     {
       name: 'supplier_login',
-      label: 'Supplier Logo',
+      label: SUPPLIER_TRANSLATION.supplier_logo,
       type: 'upload',
       relationTo: MediaCollection.slug,
     },
-    { name: 'supplier_description', label: 'Supplier Description', type: 'textarea', required: false },
+    { name: 'supplier_description', label: SUPPLIER_TRANSLATION.supplier_description, type: 'textarea', required: false },
   ],
   access: {
     read: isAdmin,

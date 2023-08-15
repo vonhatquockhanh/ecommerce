@@ -1,0 +1,30 @@
+{
+  "billing": {
+    "cn": "支付",
+    "vi": "Thanh toán"
+  },
+  "billing_id": {
+    "cn": "帐单 ID",
+    "vi": "Mã thanh toán"
+  },
+  "amount_due": {
+    "cn": "应付金额",
+    "vi": "Số tiền đến hạng"
+  },
+  "amount_paid": {
+    "cn": "支付的金额",
+    "vi": "Số tiền đã trả"
+  },
+  "payment_method": {
+    "cn": "付款方式",
+    "vi": "Phương thức thanh toán"
+  },
+  "payment_date": {
+    "cn": "付款日期",
+    "vi": "Ngày thanh toán"
+  },
+  "status": {
+    "cn": "地位",
+    "vi": "Trạng thái"
+  }
+}

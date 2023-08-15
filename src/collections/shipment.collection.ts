@@ -1,4 +1,5 @@
 import { CollectionConfig } from '../payload/collections/config/types';
+import { BILLING_TRANSLATION, ORDER_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
 import { OrderCollection } from './order.collection';
 
 export const ShipmentCollection: CollectionConfig = {
@@ -6,23 +7,24 @@ export const ShipmentCollection: CollectionConfig = {
   admin: {
     useAsTitle: 'tracking_number',
   },
+  labels: { singular: SHIPMENT_TRANSLATION.shipment, plural: SHIPMENT_TRANSLATION.shipment },
   fields: [
     {
       name: 'tracking_number',
-      label: 'Tracking Number',
+      label: SHIPMENT_TRANSLATION.tracking_number,
       type: 'text',
       required: true,
     },
     {
       name: 'billing',
-      label: 'Billing',
+      label: BILLING_TRANSLATION.billing,
       type: 'relationship',
       relationTo: 'billing',
       required: true,
     },
     {
       name: 'order',
-      label: 'Order',
+      label: ORDER_TRANSLATION.order,
       type: 'relationship',
       relationTo: 'order',
       required: true,
@@ -35,13 +37,13 @@ export const ShipmentCollection: CollectionConfig = {
       fields: [
         {
           name: 'shipment_date',
-          label: 'Shipment Date',
+          label: SHIPMENT_TRANSLATION.shipment_date,
           type: 'date',
           required: true,
         },
         {
           name: 'shipment_status',
-          label: 'Shipment Status',
+          label: SHIPMENT_TRANSLATION.shipment_status,
           type: 'select',
           options: [
             { value: 'pending', label: 'Pending' },
@@ -54,18 +56,18 @@ export const ShipmentCollection: CollectionConfig = {
         },
         {
           name: 'shipment_notes',
-          label: 'Shipment Notes',
+          label: SHIPMENT_TRANSLATION.shipment_notes,
           type: 'textarea',
         },
         {
           name: 'shipment_carrier',
-          label: 'Carrier',
+          label: SHIPMENT_TRANSLATION.carrier,
           type: 'text', // Sử dụng text để cho phép người dùng nhập thông tin về đơn vị vận chuyển
           required: true,
         },
         {
           name: 'shipment_current_step',
-          label: 'Current Step',
+          label: SHIPMENT_TRANSLATION.current_step,
           type: 'select', // Sử dụng checkbox để cho phép người dùng bấm ô chọn khâu hiện tại
           options: [
             { value: 'packing', label: 'Packing' },

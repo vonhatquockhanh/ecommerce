@@ -8,15 +8,14 @@ import { isAdminOrCreatedBySupplier, isAdminOrCreatedBySupplierProduct } from '.
 import { UserCollection } from './user.colection';
 import { SupplierCollection } from './supplier.collection';
 import { isAdmin } from '../access/admins';
+import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
-  auth: false,
   admin: {
     useAsTitle: 'product_name',
   },
-
-  labels: { singular: 'Product', plural: 'Product' },
+  labels: { singular: PRODUCT_TRANSLATION.product, plural: PRODUCT_TRANSLATION.product },
   hooks: {
     beforeChange: [
       ({ req, operation, data }) => {
@@ -31,54 +30,27 @@ export const ProductCollection: CollectionConfig = {
   },
   fields: [
     // Đặt các trường bắt buộc (required) trước
-    { name: 'product_name', label: 'Product Name', type: 'text', required: true },
-    { name: 'product_short_description', label: 'Product Short Description', type: 'textarea', required: true },
+    { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
+    { name: 'product_short_description', label: PRODUCT_TRANSLATION.product_short_description, type: 'textarea', required: true },
     {
       name: 'product_images',
-      label: 'Product Images',
+      label: PRODUCT_TRANSLATION.product_images,
       type: 'upload',
       relationTo: MediaCollection.slug,
       required: true,
     },
 
-    { name: 'product_total_price', label: 'Product Price', type: 'number', required: true },
-    { name: 'product_is_same_price', label: 'Is Same price', type: 'checkbox', defaultValue: true },
-
-    // Các trường về tính năng và phân loại sản phẩm
-    // {
-    //   name: 'product_optionality',
-    //   label: 'Product Optionality',
-    //   type: 'array',
-    //   fields: [
-    //     {
-    //       name: 'optional_type',
-    //       label: 'Optional Type',
-    //       type: 'select',
-    //       required: true,
-    //       options: [
-    //         { value: 'color', label: 'Color' },
-    //         { value: 'size', label: 'Size' },
-    //       ],
-    //     },
-    //     {
-    //       name: 'optional_value',
-    //       type: 'text',
-    //       label: 'Optional Value',
-    //       required: true,
-    //     },
-    //     { name: 'price', label: 'Price', type: 'number' },
-    //   ],
-    // },
-
+    { name: 'product_total_price', label: PRODUCT_TRANSLATION.product_price, type: 'number', required: true },
+    { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: true },
     {
       name: 'variant',
-      label: 'Variant',
+      label: VARIANT_TRANSLATION.variant,
       type: 'array',
       minRows: 1,
       fields: [
         {
           name: 'variant_item',
-          label: 'Variant item',
+          label: VARIANT_TRANSLATION.variant_item,
           required: true,
           type: 'relationship',
           relationTo: VariantCollection.slug,
@@ -99,18 +71,38 @@ export const ProductCollection: CollectionConfig = {
 
     {
       name: 'price_by_quantity',
-      label: 'Price By Quantity',
+      label: PRODUCT_TRANSLATION.price_by_quantity,
       type: 'array',
       fields: [
-        { name: 'min_quantity', label: 'Minimum Quantity', type: 'number', required: true },
-        { name: 'max_quantity', label: 'Maximum Quantity', type: 'number', required: true },
-        { name: 'price', label: 'Price', type: 'number', required: true },
+        { name: 'min_quantity', label: 'Minimum Quantity', type: 'number', required: true, validate: (value, options) => {
+          if(options.data.product_is_same_price === false && !value) {
+            return "Vui lòng nhập vào trường này"
+          }
+          return true
+        } },
+        { name: 'max_quantity', label: 'Maximum Quantity', type: 'number', required: true, validate: (value, options) => {
+          if(options.data.product_is_same_price === false && !value) {
+            return "Vui lòng nhập vào trường này"
+          }
+          return true
+        } },
+        { name: 'price', label: 'Price', type: 'number', required: true, validate: (value, options) => {
+          if(options.data.product_is_same_price === false && !value) {
+            return "Vui lòng nhập vào trường này"
+          }
+          return true
+        } },
       ],
+      validate: (value, options) => {
+        if(options.data.product_is_same_price === false && !value) {
+          return "Vui lòng nhập giá theo số lượng đặt hàng";
+        }
+        return true;
+      },
     },
-
     {
       name: 'product_media',
-      label: 'Product Media',
+      label: PRODUCT_TRANSLATION.product_images,
       type: 'relationship',
       relationTo: MediaCollection.slug,
       required: true,
@@ -119,7 +111,7 @@ export const ProductCollection: CollectionConfig = {
 
     {
       name: 'product_categories',
-      label: 'Product Categories',
+      label: PRODUCT_TRANSLATION.product_category,
       type: 'relationship',
       relationTo: CategoriesCollection.slug,
       required: true,
@@ -127,9 +119,9 @@ export const ProductCollection: CollectionConfig = {
     },
 
     // Các trường về thương hiệu, đánh giá và các thuộc tính đặc biệt của sản phẩm
-    { name: 'product_brand', label: 'Product Brand', type: 'text' },
-    { name: 'product_rating', label: 'Product Rating', type: 'number', defaultValue: 0 },
-    { name: 'product_tags', label: 'Product Tags', type: 'text' },
+    { name: 'product_brand', label: PRODUCT_TRANSLATION.product_brand, type: 'text' },
+    { name: 'product_rating', label: PRODUCT_TRANSLATION.product_rating, type: 'number', defaultValue: 0 },
+    { name: 'product_tags', label: PRODUCT_TRANSLATION.product_tags, type: 'text' },
 
     // Các trường liên quan đến các tính năng khác của sản phẩm
     // { name: 'product_is_featured', label: 'Is Featured', type: 'checkbox', defaultValue: false },
@@ -138,18 +130,18 @@ export const ProductCollection: CollectionConfig = {
 
     {
       name: 'product_sections',
-      label: 'Product Section',
+      label: PRODUCT_TRANSLATION.product_section,
       type: 'relationship',
       relationTo: ProductSectionCollection.slug,
       required: true,
       hasMany: true,
     },
 
-    { name: 'product_sale_price', label: 'Sale Price', type: 'number' },
-    { name: 'product_sale_percentage', label: 'Sale Percentage', type: 'number' },
+    { name: 'product_sale_price', label: PRODUCT_TRANSLATION.product_sale_price, type: 'number' },
+    { name: 'product_sale_percentage', label: PRODUCT_TRANSLATION.sale_percentage, type: 'number' },
     {
       name: 'product_description',
-      label: 'Product Description',
+      label: 'Mô tả sản phẩm',
       type: 'text',
       admin: { components: { Field: EditorField } },
     },

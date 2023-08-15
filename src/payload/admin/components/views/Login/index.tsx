@@ -97,7 +97,7 @@ const Login: React.FC = () => {
               display: 'block',
             }}
           >
-            Login Dashboard
+            {t('general:login')}
           </span>
           </div>
           {Array.isArray(beforeLogin) && beforeLogin.map((Component, i) => <Component key={i} />)}

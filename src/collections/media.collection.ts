@@ -1,7 +1,9 @@
 import { CollectionConfig } from '../payload/collections/config/types';
+import { MEDIA_TRANSLATION } from '../translate';
 
 export const MediaCollection: CollectionConfig = {
   slug: 'media',
+  labels: { singular: MEDIA_TRANSLATION.media, plural: MEDIA_TRANSLATION.media },
   upload: {
     staticURL: '/media',
     staticDir: 'media',

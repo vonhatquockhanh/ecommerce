@@ -3,6 +3,7 @@ import { isAdmin, isAdminOrCreatedBy } from '../access/admins';
 import { isAdminOrCreatedBySupplier } from '../access/supplier';
 import { CollectionConfig, TypeWithID } from '../payload/collections/config/types';
 import { FieldHook } from '../payload/fields/config/types';
+import { ORDER_TRANSLATION, PRODUCT_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
 import { SupplierCollection } from './supplier.collection';
 import { VariantCollection } from './variant.collection';
 
@@ -21,6 +22,7 @@ import { VariantCollection } from './variant.collection';
 
 export const OrderCollection: CollectionConfig = {
   slug: 'order',
+  labels: { singular: ORDER_TRANSLATION.order, plural: ORDER_TRANSLATION.order },
   admin: {
     useAsTitle: 'tracking_number',
   },
@@ -39,7 +41,7 @@ export const OrderCollection: CollectionConfig = {
   fields: [
     {
       name: 'tracking_number',
-      label: 'Tracking Number',
+      label: SHIPMENT_TRANSLATION.tracking_number,
       type: 'text',
       required: true,
     },
@@ -51,21 +53,14 @@ export const OrderCollection: CollectionConfig = {
         disabled: true
       }
     },
-    // {
-    //   name: 'account',
-    //   label: 'Account',
-    //   type: 'relationship',
-    //   relationTo: 'account',
-    //   required: true,
-    // },
     {
       name: 'first_name',
-      label: 'First Name',
+      label: ORDER_TRANSLATION.first_name,
       type: 'text',
     },
     {
       name: 'last_name',
-      label: 'Last Name',
+      label: ORDER_TRANSLATION.last_name,
       type: 'text',
     },
     {
@@ -76,12 +71,12 @@ export const OrderCollection: CollectionConfig = {
     },
     {
       name: 'phone',
-      label: 'phone',
+      label: ORDER_TRANSLATION.phone,
       type: 'text',
     },
     {
       name: 'product',
-      label: 'Product',
+      label: PRODUCT_TRANSLATION.product,
       type: 'relationship',
       relationTo: 'product',
       required: true,
@@ -105,7 +100,7 @@ export const OrderCollection: CollectionConfig = {
 
      {
       name: 'total_price',
-      label: 'Total Price',
+      label: ORDER_TRANSLATION.total_price,
       type: 'number',
       admin: {
         readOnly: true,
@@ -114,7 +109,7 @@ export const OrderCollection: CollectionConfig = {
 
     { 
       name: 'payment_status', 
-      label: 'Payment Status', 
+      label: ORDER_TRANSLATION.payment_status, 
       type: 'checkbox', 
       defaultValue: false 
     },

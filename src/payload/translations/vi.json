@@ -134,7 +134,7 @@
     "cancel": "Ngừng thao tác",
     "changesNotSaved": "Thay đổi chưa được lưu lại. Bạn sẽ mất bản chỉnh sửa nếu thoát bây giờ.",
     "close": "Gần",
-    "collections": "Collections",
+    "collections": "Bộ sưu tập",
     "columnToSort": "Sắp xếp cột",
     "columns": "Hiện cột",
     "confirm": "Xác nhận",
@@ -194,7 +194,7 @@
     "remove": "Loại bỏ",
     "row": "Hàng",
     "rows": "Những hàng",
-    "save": "Luu",
+    "save": "Lưu",
     "saving": "Đang lưu...",
     "searchBy": "Tìm với {{label}}",
     "selectValue": "Chọn một giá trị",
@@ -216,7 +216,8 @@
     "uploading": "Đang tải lên",
     "user": "Người dùng",
     "users": "Những người dùng",
-    "welcome": "Xin chào"
+    "welcome": "Xin chào",
+    "login": "Đăng nhập"
   },
   "operators": {
     "equals": "bằng",
