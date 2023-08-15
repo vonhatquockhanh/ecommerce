@@ -87,7 +87,8 @@
     "unspecific": "发生了一个错误。",
     "userLocked": "该用户由于有太多次失败的登录尝试而被锁定。",
     "valueMustBeUnique": "值必须是唯一的",
-    "verificationTokenInvalid": "验证令牌无效。"
+    "verificationTokenInvalid": "验证令牌无效。",
+    "pleaseEnterThisField": "请输入此字段."
   },
   "fields": {
     "addLabel": "添加{{label}}",

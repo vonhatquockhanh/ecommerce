@@ -87,7 +87,8 @@
     "unspecific": "Lỗi - Đã xảy ra (unspecific error).",
     "userLocked": "Lỗi- Tài khoản đã bị khóa do đăng nhập thất bại nhiều lần.",
     "valueMustBeUnique": "Lỗi - Giá trị không được trùng lặp.",
-    "verificationTokenInvalid": "Lỗi - Token dùng để xác thực không hợp lệ."
+    "verificationTokenInvalid": "Lỗi - Token dùng để xác thực không hợp lệ.",
+    "pleaseEnterThisField": "Vui lòng điền vào trường này."
   },
   "fields": {
     "block": "block",

@@ -73,29 +73,39 @@ export const ProductCollection: CollectionConfig = {
       name: 'price_by_quantity',
       label: PRODUCT_TRANSLATION.price_by_quantity,
       type: 'array',
+      admin: {
+        condition: (data) => {
+            if (data.product_is_same_price === false) {
+              return true;
+            } else {
+              return false;
+            }
+
+        }
+      },
       fields: [
         { name: 'min_quantity', label: 'Minimum Quantity', type: 'number', required: true, validate: (value, options) => {
           if(options.data.product_is_same_price === false && !value) {
-            return "Vui lòng nhập vào trường này"
+            return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
         { name: 'max_quantity', label: 'Maximum Quantity', type: 'number', required: true, validate: (value, options) => {
           if(options.data.product_is_same_price === false && !value) {
-            return "Vui lòng nhập vào trường này"
+            return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
         { name: 'price', label: 'Price', type: 'number', required: true, validate: (value, options) => {
           if(options.data.product_is_same_price === false && !value) {
-            return "Vui lòng nhập vào trường này"
+            return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
       ],
       validate: (value, options) => {
         if(options.data.product_is_same_price === false && !value) {
-          return "Vui lòng nhập giá theo số lượng đặt hàng";
+          return options.t('error:pleaseEnterThisField')
         }
         return true;
       },
