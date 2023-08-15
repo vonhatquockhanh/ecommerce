@@ -2,6 +2,7 @@ import React from 'react';
 import { Props } from './types';
 import useTitle from '../../../hooks/useTitle';
 import IDLabel from '../IDLabel';
+import { useTranslation } from 'react-i18next';
 
 const baseClass = 'render-title';
 

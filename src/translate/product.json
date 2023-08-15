@@ -1,0 +1,70 @@
+{
+  "product": {
+    "cn": "产品",
+    "vi": "Sản phẩm"
+  },
+  "product_name": {
+    "cn": "产品名称",
+    "vi": "Tên sản phẩm"
+  },
+  "product_short_description": {
+    "cn": "产品描述",
+    "vi": "Mô tả"
+  },
+  "product_description": {
+    "cn": "产品描述",
+    "vi": "Mô tả sản phẩm"
+  },
+  "product_images": {
+    "cn": "产品媒体",
+    "vi": "Hình ảnh sản phẩm"
+  },
+  "product_price": {
+    "cn": "产品价格",
+    "vi": "Giá sản phẩm"
+  },
+  "is_same_price": {
+    "cn": "是同价吗",
+    "vi": "Đồng giá"
+  },
+  "price_by_quantity": {
+    "cn": "按数量定价",
+    "vi": "Giá theo số lượng"
+  },
+  "product_section": {
+    "cn": "产品部分",
+    "vi": "Mục sản phẩm"
+  },
+  "product_section_title": {
+    "cn": "产品部分标题",
+    "vi": "Tiêu đề mục sản phẩm"
+  },
+  "product_section_description": {
+    "cn": "产品部分描述",
+    "vi": "Mô tả mục sản phẩm"
+  },
+  "product_category": {
+    "cn": "产品分类",
+    "vi": "Danh mục sản phẩm"
+  },
+  "product_brand": {
+    "cn": "产品品牌",
+    "vi": "Thương hiệu sản phẩm"
+  },
+  "product_rating": {
+    "cn": "产品评级",
+    "vi": "Đánh giá sản phẩm"
+  },
+  "product_tags": {
+    "cn": "产品标签",
+    "vi": "Nhãn sản phẩm"
+  },
+  "product_sale_price": {
+    "cn": "销售价格",
+    "vi": "Giá bán"
+  },
+  "sale_percentage": {
+    "cn": "销售百分比",
+    "vi": "Phần trăm doanh thu"
+  }
+}

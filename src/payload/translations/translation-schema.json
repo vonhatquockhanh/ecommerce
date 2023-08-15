@@ -326,6 +326,9 @@
         },
         "verificationTokenInvalid": {
           "type": "string"
+        },
+        "pleaseEnterThisField": {
+          "type": "string"
         }
       },
       "required": [
@@ -814,6 +817,9 @@
           "type": "string"
         },
         "welcome": {
+          "type": "string"
+        },
+        "login": {
           "type": "string"
         }
       },

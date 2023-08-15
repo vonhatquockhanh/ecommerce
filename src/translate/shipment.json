@@ -1,0 +1,34 @@
+{
+  "shipment": {
+    "cn": "分装",
+    "vi": "Lô hàng"
+  },
+  "tracking_number": {
+    "cn": "追踪号码",
+    "vi": "Số theo dõi"
+  },
+  "shipment_detail": {
+    "cn": "装运细节",
+    "vi": "Chi tiết lô hàng"
+  },
+  "shipment_date": {
+    "cn": "装运日期",
+    "vi": "Ngày giao hàng"
+  },
+  "shipment_status": {
+    "cn": "装运状态",
+    "vi": "Tình trạng giao hàng"
+  },
+  "shipment_notes": {
+    "cn": "装运备注",
+    "vi": "Ghi chú giao hàng"
+  },
+  "carrier": {
+    "cn": "搬运人/运送人",
+    "vi": "Vận chuyển"
+  },
+  "current_step": {
+    "cn": "电流阶跃",
+    "vi": "Bước hiện tại"
+  }
+}

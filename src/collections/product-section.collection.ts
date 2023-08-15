@@ -1,14 +1,15 @@
 import { CollectionConfig } from '../payload/collections/config/types';
+import { PRODUCT_TRANSLATION } from '../translate';
 
 export const ProductSectionCollection: CollectionConfig = {
   slug: 'product_sections',
-  labels: { singular: 'Product Section', plural: 'Product Section' },
+  labels: { singular: PRODUCT_TRANSLATION.product_section, plural: PRODUCT_TRANSLATION.product_section },
   admin: {
     useAsTitle: 'product_section_title',
   },
   fields: [
-    { name: 'product_section_title', label: 'Product Section Title', type: 'text', required: true },
-    { name: 'product_section_description', label: 'Product Section Description', type: 'textarea', required: false },
+    { name: 'product_section_title', label: PRODUCT_TRANSLATION.product_section_title, type: 'text', required: true },
+    { name: 'product_section_description', label: PRODUCT_TRANSLATION.product_section_description, type: 'textarea', required: false },
   ],
   access: {
     read: () => true,

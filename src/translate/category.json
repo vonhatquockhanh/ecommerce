@@ -1,0 +1,26 @@
+{
+  "category": {
+    "cn": "分类/名目",
+    "vi": "Danh mục"
+  },
+  "parent_category": {
+    "cn": "父分类",
+    "vi": "Danh mục cha"
+  },
+  "category_name": {
+    "cn": "分类名称",
+    "vi": "Tên danh mục"
+  },
+  "category_description": {
+    "cn": "分类描述",
+    "vi": "Mô tả danh mục"
+  },
+  "category_color": {
+    "cn": "类别颜色",
+    "vi": "Màu danh mục"
+  },
+  "category_image": {
+    "cn": "分类图片",
+    "vi": "Hình ảnh danh mục"
+  }
+}

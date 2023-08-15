@@ -1,18 +1,19 @@
 import { CollectionConfig } from '../payload/collections/config/types';
+import { BILLING_TRANSLATION } from '../translate';
 
 export const BillingCollection: CollectionConfig = {
   slug: 'billing',
   admin: {
     useAsTitle: 'billing_id',
   },
-  labels: { singular: 'Billing', plural: 'Billings' },
+  labels: { singular: BILLING_TRANSLATION.billing, plural: BILLING_TRANSLATION.billing },
   fields: [
-    { name: 'billing_id', label: 'Billing ID', type: 'text', required: true },
-    { name: 'amount_due', label: 'Amount Due', type: 'number', required: true },
-    { name: 'amount_paid', label: 'Amount Paid', type: 'number', required: true },
+    { name: 'billing_id', label: BILLING_TRANSLATION.billing_id, type: 'text', required: true },
+    { name: 'amount_due', label: BILLING_TRANSLATION.amount_due, type: 'number', required: true },
+    { name: 'amount_paid', label: BILLING_TRANSLATION.amount_paid, type: 'number', required: true },
     {
       name: 'payment_method',
-      label: 'Payment Method',
+      label: BILLING_TRANSLATION.payment_method,
       type: 'select', // Sử dụng select để chọn trong danh sách các tùy chọn
       required: true,
       options: [
@@ -22,10 +23,10 @@ export const BillingCollection: CollectionConfig = {
         // Thêm các tùy chọn khác tùy theo yêu cầu của bạn
       ],
     },
-    { name: 'payment_date', label: 'Payment Date', type: 'date', required: true },
+    { name: 'payment_date', label: BILLING_TRANSLATION.payment_date, type: 'date', required: true },
     {
       name: 'status',
-      label: 'Status',
+      label: BILLING_TRANSLATION.status,
       type: 'select', // Sử dụng select để chọn trong danh sách các tùy chọn
       required: true,
       options: [

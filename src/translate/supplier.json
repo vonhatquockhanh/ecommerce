@@ -1,0 +1,18 @@
+{
+  "supplier": {
+    "cn": "供应商",
+    "vi": "Nhà cung cấp"
+  },
+  "supplier_name": {
+    "cn": "供应商名称",
+    "vi": "Tên nhà cung cấp"
+  },
+  "supplier_logo": {
+    "cn": "供应商标志",
+    "vi": "Logo nhà cung cấp"
+  },
+  "supplier_description": {
+    "cn": "供应商描述",
+    "vi": "Mô tả nhà cung cấp"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "user": {
+    "cn": "用户",
+    "vi": "Người dùng"
+  },
+  "user_name": {
+    "cn": "账户名称",
+    "vi": "Tên Người dùng"
+  },
+  "user_role": {
+    "cn": "职务",
+    "vi": "Quyền"
+  },
+  "supplier": {
+    "cn": "供应商",
+    "vi": "Nhà cung cấp"
+  }
+}

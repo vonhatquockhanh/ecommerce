@@ -1,20 +1,22 @@
 import { CollectionConfig } from '../payload/collections/config/types';
+import { VARIANT_TRANSLATION } from '../translate';
 
 export const VariantCollection: CollectionConfig = {
   slug: 'variant',
   admin: {
     useAsTitle: 'variant_description',
   },
+  labels: { singular: VARIANT_TRANSLATION.variant, plural: VARIANT_TRANSLATION.variant },
   fields: [
-    { name: 'variant_description', label: 'Variant description', type: 'text', required: true },
+    { name: 'variant_description', label: VARIANT_TRANSLATION.variant_description, type: 'text', required: true },
     {
       name: 'variant_optionality',
-      label: 'Variant Optionality',
+      label: VARIANT_TRANSLATION.variant_optionality,
       type: 'array',
       fields: [
         {
           name: 'optional_type',
-          label: 'Optional Type',
+          label: VARIANT_TRANSLATION.optional_type,
           type: 'select',
           required: true,
           options: [
@@ -27,7 +29,7 @@ export const VariantCollection: CollectionConfig = {
         {
           name: 'optional_value',
           type: 'text',
-          label: 'Optional Value',
+          label: VARIANT_TRANSLATION.optional_value,
           required: true,
         },
       ],

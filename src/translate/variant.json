@@ -1,0 +1,26 @@
+{
+  "variant": {
+    "cn": "变体",
+    "vi": "Biến thể"
+  },
+  "variant_optionality": {
+    "cn": "可选变体",
+    "vi": "Tuỳ chọn biến thể"
+  },
+  "variant_description": {
+    "cn": "变体描述",
+    "vi": "Mô tả biến thể"
+  },
+  "optional_type": {
+    "cn": "可选类型",
+    "vi": "Loại tuỳ chọn"
+  },
+  "optional_value": {
+    "cn": "可选值",
+    "vi": "Giá trị tuỳ chọn"
+  },
+  "variant_item": {
+    "cn": "变体项目",
+    "vi": "Mặt hàng biến thể"
+  }
+}
