@@ -28,5 +28,10 @@
     "zh": "分类图片",
     "vi": "Hình ảnh danh mục",
     "en": "Category image"
+  },
+  "category_icon": {
+    "zh": "类别标志",
+    "vi": "Logo danh mục",
+    "en": "Category logo"
   }
 }

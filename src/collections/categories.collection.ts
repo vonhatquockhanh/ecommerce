@@ -18,6 +18,7 @@ export const CategoriesCollection: CollectionConfig = {
     { name: 'category_name', label: CATEGORY_TRANSLATION.category_name, type: 'text', required: true },
     { name: 'category_description', label: CATEGORY_TRANSLATION.category_description, type: 'textarea' },
     { name: 'category_color', label: CATEGORY_TRANSLATION.category_color, type: 'text' },
+    { name: 'category_icon', label: CATEGORY_TRANSLATION.category_icon, type: 'upload', relationTo: MediaCollection.slug },
     { name: 'category_image', label: CATEGORY_TRANSLATION.category_image, type: 'upload', relationTo: MediaCollection.slug },
   ],
   access: {
