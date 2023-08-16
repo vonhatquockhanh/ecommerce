@@ -1,26 +1,32 @@
 {
   "category": {
-    "cn": "分类/名目",
-    "vi": "Danh mục"
+    "zh": "分类/名目",
+    "vi": "Danh mục",
+    "en": "Category"
   },
   "parent_category": {
-    "cn": "父分类",
-    "vi": "Danh mục cha"
+    "zh": "父分类",
+    "vi": "Danh mục cha",
+    "en": "Parent category"
   },
   "category_name": {
-    "cn": "分类名称",
-    "vi": "Tên danh mục"
+    "zh": "分类名称",
+    "vi": "Tên danh mục",
+    "en": "Category name"
   },
   "category_description": {
-    "cn": "分类描述",
-    "vi": "Mô tả danh mục"
+    "zh": "分类描述",
+    "vi": "Mô tả danh mục",
+    "en": "Category description"
   },
   "category_color": {
-    "cn": "类别颜色",
-    "vi": "Màu danh mục"
+    "zh": "类别颜色",
+    "vi": "Màu danh mục",
+    "en": "Category color"
   },
   "category_image": {
-    "cn": "分类图片",
-    "vi": "Hình ảnh danh mục"
+    "zh": "分类图片",
+    "vi": "Hình ảnh danh mục",
+    "en": "Category image"
   }
 }

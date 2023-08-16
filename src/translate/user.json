@@ -1,18 +1,22 @@
 {
   "user": {
-    "cn": "用户",
-    "vi": "Người dùng"
+    "zh": "用户",
+    "vi": "Người dùng",
+    "en": "User"
   },
   "user_name": {
-    "cn": "账户名称",
-    "vi": "Tên Người dùng"
+    "zh": "账户名称",
+    "vi": "Tên Người dùng",
+    "en": "User name"
   },
   "user_role": {
-    "cn": "职务",
-    "vi": "Quyền"
+    "zh": "职务",
+    "vi": "Quyền",
+    "en": "User role"
   },
   "supplier": {
-    "cn": "供应商",
-    "vi": "Nhà cung cấp"
+    "zh": "供应商",
+    "vi": "Nhà cung cấp",
+    "en": "Supplier"
   }
 }

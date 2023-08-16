@@ -11,9 +11,9 @@ const useTitle = (useAsTitle: string, collection: string): string => {
   const { admin: { dateFormat: dateFormatFromConfig } } = useConfig();
   const collectionConfig = useRelatedCollections(collection)?.[0];
   const fieldConfig = collectionConfig?.fields?.find((field) => 'name' in field && field?.name === useAsTitle);
-
+  
   const { i18n } = useTranslation();
-
+  
   const isDate = fieldConfig?.type === 'date';
 
   let title = value;

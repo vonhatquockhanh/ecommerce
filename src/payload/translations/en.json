@@ -323,5 +323,17 @@
     "viewingVersionGlobal": "Viewing version for the global {{entityLabel}}",
     "viewingVersions": "Viewing versions for the {{entityLabel}} {{documentTitle}}",
     "viewingVersionsGlobal": "Viewing versions for the global {{entityLabel}}"
+  },
+  "collection": {
+    "Users": "Users",
+    "Billing": "Billing",
+    "Categories": "Categories",
+    "Media": "Media",
+    "Order": "Order",
+    "Product": "Product",
+    "Product_sections": "Product_sections",
+    "Shipment": "Shipment",
+    "Supplier": "Supplier",
+    "Variant": "Variant"
   }
 }
