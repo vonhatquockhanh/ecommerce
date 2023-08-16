@@ -12,6 +12,7 @@ export const getCategoryBySlug = async slug => {
 export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
   const products = await payload.find({
     collection: 'product',
+    limit: 1000000,
   });
 
   if (products && products.docs.length) {
