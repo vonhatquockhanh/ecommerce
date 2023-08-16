@@ -41,7 +41,7 @@ export const ProductCollection: CollectionConfig = {
     },
 
     { name: 'product_total_price', label: PRODUCT_TRANSLATION.product_price, type: 'number', required: true },
-    { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: true },
+    { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
       name: 'variant',
       label: VARIANT_TRANSLATION.variant,
@@ -103,12 +103,6 @@ export const ProductCollection: CollectionConfig = {
           return true
         } },
       ],
-      validate: (value, options) => {
-        if(options.data.product_is_same_price === true && !value) {
-          return options.t('error:pleaseEnterThisField')
-        }
-        return true;
-      },
     },
     {
       name: 'product_media',

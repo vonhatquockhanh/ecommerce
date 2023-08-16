@@ -15,6 +15,7 @@ const RenderTitle: React.FC<Props> = (props) => {
     fallback = '[untitled]',
     // fallback = '',
   } = props;
+  const { t } = useTranslation('collection');
   const titleFromForm = useTitle(useAsTitle, collection);
 
   let title = titleFromForm;
@@ -33,7 +34,7 @@ const RenderTitle: React.FC<Props> = (props) => {
 
   return (
     <span className={baseClass}>
-      {title}
+      {t(title)}
     </span>
   );
 };
