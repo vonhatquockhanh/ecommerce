@@ -18,7 +18,10 @@ export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 1
   const categories = await payload.find({
     collection: 'categories',
     where: {
-      or: [{ parent_categories: { equals: categorieId } }, { _id: { equals: categorieId } }],
+      or: [
+        { 'parent_categories.id': categorieId },
+        { _id: categorieId }
+      ],
     },
   });
 
