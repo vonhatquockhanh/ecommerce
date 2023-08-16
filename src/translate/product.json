@@ -1,70 +1,87 @@
 {
   "product": {
     "cn": "产品",
-    "vi": "Sản phẩm"
+    "vi": "Sản phẩm",
+    "en": "Product"
   },
   "product_name": {
     "cn": "产品名称",
-    "vi": "Tên sản phẩm"
+    "vi": "Tên sản phẩm",
+    "en": "Product name"
   },
   "product_short_description": {
     "cn": "产品描述",
-    "vi": "Mô tả"
+    "vi": "Mô tả",
+    "en": "Product short description"
   },
   "product_description": {
     "cn": "产品描述",
-    "vi": "Mô tả sản phẩm"
+    "vi": "Mô tả sản phẩm",
+    "en": "Product description"
   },
   "product_images": {
     "cn": "产品媒体",
-    "vi": "Hình ảnh sản phẩm"
+    "vi": "Hình ảnh sản phẩm",
+    "en": "Product images"
   },
   "product_price": {
     "cn": "产品价格",
-    "vi": "Giá sản phẩm"
+    "vi": "Giá sản phẩm",
+    "en": "Product price"
   },
   "is_same_price": {
     "cn": "是同价吗",
-    "vi": "Đồng giá"
+    "vi": "Đồng giá",
+    "en": "Same price"
   },
   "price_by_quantity": {
     "cn": "按数量定价",
-    "vi": "Giá theo số lượng"
+    "vi": "Giá theo số lượng",
+    "en": "Price by quantity"
   },
   "product_section": {
     "cn": "产品部分",
-    "vi": "Mục sản phẩm"
+    "vi": "Mục sản phẩm",
+    "en": "Product section"
   },
   "product_section_title": {
     "cn": "产品部分标题",
-    "vi": "Tiêu đề mục sản phẩm"
+    "vi": "Tiêu đề mục sản phẩm",
+    "en": "Product section title"
   },
   "product_section_description": {
     "cn": "产品部分描述",
-    "vi": "Mô tả mục sản phẩm"
+    "vi": "Mô tả mục sản phẩm",
+    "en": "Product section description"
   },
   "product_category": {
     "cn": "产品分类",
-    "vi": "Danh mục sản phẩm"
+    "vi": "Danh mục sản phẩm",
+    "en": "Product category"
   },
   "product_brand": {
     "cn": "产品品牌",
-    "vi": "Thương hiệu sản phẩm"
+    "vi": "Thương hiệu sản phẩm",
+    "en": "Product brand"
   },
   "product_rating": {
     "cn": "产品评级",
-    "vi": "Đánh giá sản phẩm"
+    "vi": "Đánh giá sản phẩm",
+    "en": "Product rating"
   },
   "product_tags": {
     "cn": "产品标签",
-    "vi": "Nhãn sản phẩm"
+    "vi": "Nhãn sản phẩm",
+    "en": "Product tags"
   },
   "product_sale_price": {
     "cn": "销售价格",
-    "vi": "Giá bán"
+    "vi": "Giá bán",
+    "en": "Product sale price"
   },
   "sale_percentage": {
     "cn": "销售百分比",
-    "vi": "Phần trăm doanh thu"
+    "vi": "Phần trăm doanh thu",
+    "en": "Sale percentage"
   }
 }
