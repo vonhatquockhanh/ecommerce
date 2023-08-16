@@ -75,7 +75,7 @@ export const ProductCollection: CollectionConfig = {
       type: 'array',
       admin: {
         condition: (data) => {
-            if (data.product_is_same_price === false) {
+            if (data.product_is_same_price === true) {
               return true;
             } else {
               return false;
@@ -85,26 +85,26 @@ export const ProductCollection: CollectionConfig = {
       },
       fields: [
         { name: 'min_quantity', label: 'Minimum Quantity', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === false && !value) {
+          if(options.data.product_is_same_price === true && !value) {
             return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
         { name: 'max_quantity', label: 'Maximum Quantity', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === false && !value) {
+          if(options.data.product_is_same_price === true && !value) {
             return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
         { name: 'price', label: 'Price', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === false && !value) {
+          if(options.data.product_is_same_price === true && !value) {
             return options.t('error:pleaseEnterThisField')
           }
           return true
         } },
       ],
       validate: (value, options) => {
-        if(options.data.product_is_same_price === false && !value) {
+        if(options.data.product_is_same_price === true && !value) {
           return options.t('error:pleaseEnterThisField')
         }
         return true;
