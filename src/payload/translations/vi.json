@@ -313,5 +313,17 @@
     "viewingVersionGlobal": "`Xem phiên bản toàn thể (global) của {{entityLabel}}",
     "viewingVersions": "Xem những phiên bản của {{entityLabel}} {{documentTitle}}",
     "viewingVersionsGlobal": "`Xem những phiên bản toàn thể (global) của {{entityLabel}}"
+  },
+  "collection": {
+    "Users": "Người dùng",
+    "Billing": "Thanh toán",
+    "Categories": "Danh mục",
+    "Media": "Đa phương tiện",
+    "Order": "Thanh toán",
+    "Product": "Sản phẩm",
+    "Product_sections": "Mục sản phẩm",
+    "Shipment": "Vận chuyển",
+    "Supplier": "Nhà cung cấp",
+    "Variant": "Biến thể"
   }
 }

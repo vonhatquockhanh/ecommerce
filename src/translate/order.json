@@ -1,31 +1,31 @@
 {
   "order": {
-    "cn": "订单",
+    "zh": "订单",
     "vi": "Đặt hàng",
     "en": "Order"
   },
   "first_name": {
-    "cn": "名",
+    "zh": "名",
     "vi": "Tên",
     "en": "First name"
   },
   "last_name": {
-    "cn": "姓",
+    "zh": "姓",
     "vi": "Họ",
     "en": "Last name"
   },
   "phone": {
-    "cn": "手机",
+    "zh": "手机",
     "vi": "Số điện thoại",
     "en": "Phone"
   },
   "total_price": {
-    "cn": "总价",
+    "zh": "总价",
     "vi": "Tổng tiền",
     "en": "Total price"
   },
   "payment_status": {
-    "cn": "支付状态/付款状态",
+    "zh": "支付状态/付款状态",
     "vi": "Trạng thái thanh toán",
     "en": "Payment status"
   }

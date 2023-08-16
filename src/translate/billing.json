@@ -1,36 +1,36 @@
 {
   "billing": {
-    "cn": "支付",
+    "zh": "支付",
     "vi": "Thanh toán",
     "en": "Billing"
   },
   "billing_id": {
-    "cn": "帐单 ID",
+    "zh": "帐单 ID",
     "vi": "Mã thanh toán",
     "en": "Billing ID"
   },
   "amount_due": {
-    "cn": "应付金额",
+    "zh": "应付金额",
     "vi": "Số tiền đến hạng",
     "en": "Amount due"
   },
   "amount_paid": {
-    "cn": "支付的金额",
+    "zh": "支付的金额",
     "vi": "Số tiền đã trả",
     "en": "Amount paid"
   },
   "payment_method": {
-    "cn": "付款方式",
+    "zh": "付款方式",
     "vi": "Phương thức thanh toán",
     "en": "Payment method"
   },
   "payment_date": {
-    "cn": "付款日期",
+    "zh": "付款日期",
     "vi": "Ngày thanh toán",
     "en": "Payment date"
   },
   "status": {
-    "cn": "地位",
+    "zh": "地位",
     "vi": "Trạng thái",
     "en": "Status"
   }

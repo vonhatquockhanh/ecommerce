@@ -1,31 +1,31 @@
 {
   "variant": {
-    "cn": "变体",
+    "zh": "变体",
     "vi": "Biến thể",
     "en": "Variants"
   },
   "variant_optionality": {
-    "cn": "可选变体",
+    "zh": "可选变体",
     "vi": "Tuỳ chọn biến thể",
     "en": "Variant optionality"
   },
   "variant_description": {
-    "cn": "变体描述",
+    "zh": "变体描述",
     "vi": "Mô tả biến thể",
     "en": "Variant description"
   },
   "optional_type": {
-    "cn": "可选类型",
+    "zh": "可选类型",
     "vi": "Loại tuỳ chọn",
     "en": "Optional type"
   },
   "optional_value": {
-    "cn": "可选值",
+    "zh": "可选值",
     "vi": "Giá trị tuỳ chọn",
     "en": "Optional value"
   },
   "variant_item": {
-    "cn": "变体项目",
+    "zh": "变体项目",
     "vi": "Mặt hàng biến thể",
     "en": "Variant item"
   }

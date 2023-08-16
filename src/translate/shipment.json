@@ -1,41 +1,41 @@
 {
   "shipment": {
-    "cn": "分装",
+    "zh": "分装",
     "vi": "Giao hàng",
     "en": "Shipment"
   },
   "tracking_number": {
-    "cn": "追踪号码",
+    "zh": "追踪号码",
     "vi": "Số theo dõi",
     "en": "Tracking number"
   },
   "shipment_detail": {
-    "cn": "装运细节",
+    "zh": "装运细节",
     "vi": "Chi tiết giao hàng",
     "en": "Shipment detail"
   },
   "shipment_date": {
-    "cn": "装运日期",
+    "zh": "装运日期",
     "vi": "Ngày giao hàng",
     "en": "Shipment date"
   },
   "shipment_status": {
-    "cn": "装运状态",
+    "zh": "装运状态",
     "vi": "Tình trạng giao hàng",
     "en": "Shipment status"
   },
   "shipment_notes": {
-    "cn": "装运备注",
+    "zh": "装运备注",
     "vi": "Ghi chú giao hàng",
     "en": "Shipment notes"
   },
   "carrier": {
-    "cn": "搬运人/运送人",
+    "zh": "搬运人/运送人",
     "vi": "Vận chuyển",
     "en": "Carrier"
   },
   "current_step": {
-    "cn": "电流阶跃",
+    "zh": "电流阶跃",
     "vi": "Bước hiện tại",
     "en": "Current step"
   }

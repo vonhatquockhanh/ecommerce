@@ -1298,6 +1298,42 @@
         "viewingVersions",
         "viewingVersionsGlobal"
       ]
+    },  
+    "collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Users": {
+          "type": "string"
+        },
+        "Billing": {
+          "type": "string"
+        },
+        "Categories": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "Order": {
+          "type": "string"
+        },
+        "Product": {
+          "type": "string"
+        },
+        "Product_sections": {
+          "type": "string"
+        },
+        "Shipment": {
+          "type": "string"
+        },
+        "Supplier": {
+          "type": "string"
+        },
+        "Variant": {
+          "type": "string"
+        }
+      }
     }
   },
   "required": [

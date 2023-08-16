@@ -323,5 +323,17 @@
     "viewingVersionGlobal": "正在查看全局{{entityLabel}}的版本",
     "viewingVersions": "正在查看{{entityLabel}} {{documentTitle}}的版本",
     "viewingVersionsGlobal": "正在查看全局{{entityLabel}}的版本"
+  },
+  "collection": {
+    "Users": "用户",
+    "Billing": "支付",
+    "Categories": "分类/名目",
+    "Media": "媒体",
+    "Order": "订单",
+    "Product": "产品",
+    "Product_sections": "产品部分",
+    "Shipment": "分装",
+    "Supplier": "供应商",
+    "Variant": "变体"
   }
 }
