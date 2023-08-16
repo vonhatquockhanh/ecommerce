@@ -15,20 +15,24 @@ export const getProductByCategorieID = async (categorieId, page = 1, limit = 10)
 };
 
 export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 10) => {
+  let categoriesIds = [];
+  categoriesIds.push(categorieId);
+
   const categories = await payload.find({
     collection: 'categories',
-    where: {
-      or: [
-        { 'parent_categories.id': categorieId },
-        { _id: categorieId }
-      ],
-    },
+    limit: 1000000,
   });
 
   if (categories && categories?.docs?.length) {
+    categories.docs.forEach(category => {
+      if ((category?.parent_categories as any)?.id === categorieId) {
+        categoriesIds.push(category.id);
+      }
+    });
+
     const products = await payload.find({
       collection: 'product',
-      where: { product_categories: { in: categories.docs.map(x => x.id) } },
+      where: { product_categories: { in: categoriesIds } },
       page: page,
       limit: limit,
       sort: '-createdAt',
@@ -211,7 +215,7 @@ export const getSuitableProductForUser = async (productIds, page = 1, limit = 10
         },
         {
           product_categories: { in: productCategoriesArray },
-        }
+        },
       ],
     },
     page: page,
@@ -222,15 +226,14 @@ export const getSuitableProductForUser = async (productIds, page = 1, limit = 10
   return products;
 };
 
-export const getProductByID = async (productId) => {
+export const getProductByID = async productId => {
   const products = await payload.findByID({
     collection: 'product',
-    id: productId
+    id: productId,
   });
 
   return products;
 };
-
 
 export const getAllProducts = async (productName, page = 1, limit = 10) => {
   if (productName) {
