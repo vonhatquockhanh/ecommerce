@@ -14,21 +14,56 @@ export const getProductByCategorieID = async (categorieId, page = 1, limit = 10)
   return products;
 };
 
+// export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 10) => {
+//   let categoriesIds = [];
+//   categoriesIds.push(categorieId);
+
+//   const categories = await payload.find({
+//     collection: 'categories',
+//     limit: 1000000,
+//   });
+
+//   if (categories && categories?.docs?.length) {
+//     categories.docs.forEach(category => {
+//       if ((category?.parent_categories as any)?.id === categorieId) {
+//         categoriesIds.push(category.id);
+//       }
+//     });
+
+//     const products = await payload.find({
+//       collection: 'product',
+//       where: { product_categories: { in: categoriesIds } },
+//       page: page,
+//       limit: limit,
+//       sort: '-createdAt',
+//     });
+
+//     return products;
+//   }
+
+//   return null;
+// };
+
 export const getProductByCategorieIDV2 = async (categorieId, page = 1, limit = 10) => {
-  let categoriesIds = [];
-  categoriesIds.push(categorieId);
+  let categoriesIds = [categorieId];
 
   const categories = await payload.find({
     collection: 'categories',
     limit: 1000000,
   });
 
-  if (categories && categories?.docs?.length) {
-    categories.docs.forEach(category => {
-      if ((category?.parent_categories as any)?.id === categorieId) {
-        categoriesIds.push(category.id);
-      }
-    });
+  if (categories && categories.docs.length) {
+    let categoriesToCheck = [...categoriesIds]; 
+
+    while (categoriesToCheck.length > 0) {
+      const categoryIdToCheck = categoriesToCheck.shift(); 
+      categories.docs.forEach(category => {
+        if ((category?.parent_categories as any)?.id === categoryIdToCheck) {
+          categoriesIds.push(category.id);
+          categoriesToCheck.push(category.id); 
+        }
+      });
+    }
 
     const products = await payload.find({
       collection: 'product',
