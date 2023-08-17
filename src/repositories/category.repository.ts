@@ -17,13 +17,32 @@ export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
 
   if (categories && categories.docs.length) {
     for (const category of categories.docs) {
-      const products = await payload.find({
-        where: { product_categories: { in: [category.id] } },
-        collection: 'product',
-        limit: 1000000,
-      });
+      const categoriesToCheck = [category.id];
+      const visitedCategories = new Set();
+      let productCount = 0;
 
-      category.productCount = products.docs.length;
+      while (categoriesToCheck.length > 0) {
+        const categoryIdToCheck = categoriesToCheck.shift();
+        if (!visitedCategories.has(categoryIdToCheck)) {
+          visitedCategories.add(categoryIdToCheck);
+
+          const childCategories = categories.docs.filter(
+            c => (c.parent_categories as any)?.id === categoryIdToCheck
+          );
+
+          categoriesToCheck.push(...childCategories.map(c => c.id));
+
+          const products = await payload.find({
+            collection: 'product',
+            where: { product_categories: { in: [categoryIdToCheck] } },
+            limit: 1000000,
+          });
+
+          productCount += products.docs.length;
+        }
+      }
+
+      category.productCount = productCount;
     }
 
     return categories;
