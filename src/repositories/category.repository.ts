@@ -10,32 +10,23 @@ export const getCategoryBySlug = async slug => {
 };
 
 export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
-  const products = await payload.find({
-    collection: 'product',
+  const categories = await payload.find({
+    collection: 'categories',
     limit: 1000000,
   });
 
-  if (products && products.docs.length) {
-    const productCategoryIds = products.docs.flatMap(product => product.product_categories);
-    const uniqueCategoryIds = [...new Set(productCategoryIds)]; 
+  if (categories && categories.docs.length) {
+    for (const category of categories.docs) {
+      const products = await payload.find({
+        where: { product_categories: { in: [category.id] } },
+        collection: 'product',
+        limit: 1000000,
+      });
 
-    const _idArray = uniqueCategoryIds.map(id => new mongoose.Types.ObjectId(id as string)); // Đặt kiểu dữ liệu là 'string'
-
-    const categories = await payload.find({
-      collection: 'categories',
-      where: { _id: { in: _idArray } },
-      page: page,
-      limit: limit,
-      sort: '-createdAt',
-    });
-
-    if (categories && categories.docs.length) {
-      return categories;
+      category.productCount = products.docs.length;
     }
 
-    return {
-      docs: [],
-    };
+    return categories;
   }
 
   return {
