@@ -31,7 +31,7 @@ export const ProductCollection: CollectionConfig = {
   fields: [
     // Đặt các trường bắt buộc (required) trước
     { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
-    { name: 'product_short_description', label: PRODUCT_TRANSLATION.product_short_description, type: 'textarea', required: true },
+    // { name: 'product_short_description', label: PRODUCT_TRANSLATION.product_short_description, type: 'textarea', required: true },
     {
       name: 'product_images',
       label: PRODUCT_TRANSLATION.product_images,
