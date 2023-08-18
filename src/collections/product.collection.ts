@@ -20,12 +20,20 @@ export const ProductCollection: CollectionConfig = {
     beforeChange: [
       ({ req, operation, data }) => {
         if (operation === 'create') {
-          if (req.user) {
+          if (req.user && req.user.role === 'supplier') {
             data.supplierId = req.user.supplier.id;
             return data;
           }
         }
       },
+    ],
+    beforeValidate: [
+      ({ data, req, operation, originalDoc }) => {
+        console.log('data:', data)
+        if (req.user.role !== 'supplier' && !data.supplierId) {
+          throw new Error('Vui lòng chọn nhà cung cấp');
+        }
+      }
     ],
   },
   fields: [
@@ -156,11 +164,11 @@ export const ProductCollection: CollectionConfig = {
       access: {
         update: () => false,
         read: isAdmin,
+        create: isAdmin,
       },
       admin: {
-        readOnly: true,
+        readOnly: false,
         position: 'sidebar',
-        condition: data => Boolean(data?.supplierId),
       },
     },
   ],
