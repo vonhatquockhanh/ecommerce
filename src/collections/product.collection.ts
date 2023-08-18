@@ -29,7 +29,6 @@ export const ProductCollection: CollectionConfig = {
     ],
     beforeValidate: [
       ({ data, req, operation, originalDoc }) => {
-        console.log('data:', data)
         if (req.user.role !== 'supplier' && !data.supplierId) {
           throw new Error('Vui lòng chọn nhà cung cấp');
         }
