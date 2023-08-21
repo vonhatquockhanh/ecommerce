@@ -8,7 +8,8 @@ import {
   getSuitableProductForUser,
   getProductByListCategorieID,
   getProductByID,
-  getAllProducts
+  getAllProducts,
+  getSupplierByProductByID
 } from '../repositories/product.repository';
 import payload from '../payload';
 const fs = require('fs');
@@ -207,4 +208,8 @@ export const ImportProductService = async (file) => {
     console.log(error);
     throw new Error(error.message);
   }
+};
+
+export const getSupplierByProductByIDService = async (productId) => {
+  return await getSupplierByProductByID(productId);
 };

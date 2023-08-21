@@ -292,3 +292,12 @@ export const getAllProducts = async (productName, page = 1, limit = 10) => {
     return products;
   }
 };
+
+export const getSupplierByProductByID = async productId => {
+  const products = await payload.findByID({
+    collection: 'product',
+    id: productId,
+  });
+
+  return products?.supplierId;
+};

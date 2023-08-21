@@ -48,6 +48,7 @@ export const ProductCollection: CollectionConfig = {
     },
 
     { name: 'product_total_price', label: PRODUCT_TRANSLATION.product_price, type: 'number', required: true },
+    { name: 'product_weigh', label: PRODUCT_TRANSLATION.product_weigh, type: 'number', required: false },
     { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
       name: 'variant',

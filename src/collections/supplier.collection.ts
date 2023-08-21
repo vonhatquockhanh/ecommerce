@@ -19,6 +19,17 @@ export const SupplierCollection: CollectionConfig = {
       relationTo: MediaCollection.slug,
     },
     { name: 'supplier_description', label: SUPPLIER_TRANSLATION.supplier_description, type: 'textarea', required: false },
+
+    { name: 'supplier_bank_name', label: SUPPLIER_TRANSLATION.supplier_bank_name, type: 'text', required: false },
+    { name: 'supplier_account_number', label: SUPPLIER_TRANSLATION.supplier_account_number, type: 'text', required: false },
+    { name: 'supplier_account_holder_name', label: SUPPLIER_TRANSLATION.supplier_account_holder_name, type: 'text', required: false },
+    { name: 'supplier_branch', label: SUPPLIER_TRANSLATION.supplier_branch, type: 'text', required: false },
+    {
+      name: 'supplier_qr_code',
+      label: SUPPLIER_TRANSLATION.supplier_qr_code,
+      type: 'upload',
+      relationTo: MediaCollection.slug,
+    },
   ],
   access: {
     read: isAdmin,
