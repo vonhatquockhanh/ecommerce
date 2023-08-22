@@ -1,9 +1,24 @@
+import { isAdmin } from '../access/admins';
+import { isAdminOrCreatedBySupplierMedia } from '../access/supplier';
 import { CollectionConfig } from '../payload/collections/config/types';
 import { MEDIA_TRANSLATION } from '../translate';
+import { SupplierCollection } from './supplier.collection';
 
 export const MediaCollection: CollectionConfig = {
   slug: 'media',
   labels: { singular: MEDIA_TRANSLATION.media, plural: MEDIA_TRANSLATION.media },
+  hooks: {
+    beforeChange: [
+      ({ req, operation, data }) => {
+        if (operation === 'create') {
+          if (req.user && req.user.role === 'supplier') {
+            data.supplierId = req.user.supplier.id;
+            return data;
+          }
+        }
+      },
+    ],
+  },
   upload: {
     staticURL: '/media',
     staticDir: 'media',
@@ -34,12 +49,27 @@ export const MediaCollection: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*', 'video/*'],
   },
-  fields: [{ name: 'alt', label: 'Alt Text', type: 'text' }],
+  fields: [
+    { name: 'alt', label: 'Alt Text', type: 'text' },
+    {
+      name: 'supplierId',
+      type: 'relationship',
+      relationTo: SupplierCollection.slug,
+      access: {
+        update: isAdmin,
+        read: isAdmin,
+        create: isAdmin,
+      },
+      admin: {
+        readOnly: false,
+        position: 'sidebar',
+      },
+    },
+  ],
   access: {
-    read: () => true,
-    create: () => true,
-    update:  () => true,
-    delete:  () => true,
+    read: isAdminOrCreatedBySupplierMedia,
+    create: isAdminOrCreatedBySupplierMedia,
+    update: isAdminOrCreatedBySupplierMedia,
+    delete: isAdminOrCreatedBySupplierMedia,
   },
 };
-

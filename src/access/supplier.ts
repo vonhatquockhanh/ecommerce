@@ -38,6 +38,26 @@ export const isAdminOrCreatedBySupplier = ({ req: { user } }) => {
     return false;
   };
 
+  export const isAdminOrCreatedBySupplierMedia = ({ req: { user } }) => {
+    // Scenario #1 - Check if user has the 'admin' role
+    if (user && user.role === 'admin') {
+      return true;
+    }
+  
+    // Scenario #2 - Allow only documents with the supplier set to the 'supplierId' field
+    if (user) {
+      // Will return access for only documents that were created by the supplierId
+      return {
+        supplierId: {
+          equals: user.supplier.id,
+        },
+      };
+    }
+  
+    // Scenario #3 - Disallow all others
+    return false;
+  };
+
   export const isSupplier = ({ req: { user } }) => {
     // Scenario #1 - Check if user has the 'admin' role
     if (user && user.role === 'supplier') {

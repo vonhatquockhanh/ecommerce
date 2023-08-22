@@ -16,7 +16,7 @@ export const SupplierCollection: CollectionConfig = {
       name: 'supplier_login',
       label: SUPPLIER_TRANSLATION.supplier_logo,
       type: 'upload',
-      relationTo: MediaCollection.slug,
+      relationTo: 'media',
     },
     { name: 'supplier_description', label: SUPPLIER_TRANSLATION.supplier_description, type: 'textarea', required: false },
   ],
