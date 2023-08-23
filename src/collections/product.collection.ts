@@ -9,6 +9,7 @@ import { UserCollection } from './user.colection';
 import { SupplierCollection } from './supplier.collection';
 import { isAdmin } from '../access/admins';
 import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
+import currencyField from '../components/CurrencyField/config';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -38,7 +39,7 @@ export const ProductCollection: CollectionConfig = {
   fields: [
     // Đặt các trường bắt buộc (required) trước
     { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
-    // { name: 'product_short_description', label: PRODUCT_TRANSLATION.product_short_description, type: 'textarea', required: true },
+    currencyField,
     {
       name: 'product_images',
       label: PRODUCT_TRANSLATION.product_images,
@@ -46,8 +47,6 @@ export const ProductCollection: CollectionConfig = {
       relationTo: MediaCollection.slug,
       required: true,
     },
-
-    { name: 'product_total_price', label: PRODUCT_TRANSLATION.product_price, type: 'number', required: true },
     { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
       name: 'variant',
@@ -64,7 +63,7 @@ export const ProductCollection: CollectionConfig = {
         },
         // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
         { name: 'price', label: 'Price', type: 'number', required: true },
-        { name: 'stock', label: 'Stock', type: 'number', required: false },
+        { name: 'stock', label: 'Stock', type: 'number', required: false},
       ],
     },
 
