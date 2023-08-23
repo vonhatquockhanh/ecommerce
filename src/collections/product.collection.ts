@@ -36,6 +36,13 @@ export const ProductCollection: CollectionConfig = {
     ],
   },
   fields: [
+    {
+      name: 'slug',
+      type: 'text',
+      admin: {
+        hidden: true,
+      }
+    },
     // Đặt các trường bắt buộc (required) trước
     { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
     // { name: 'product_short_description', label: PRODUCT_TRANSLATION.product_short_description, type: 'textarea', required: true },

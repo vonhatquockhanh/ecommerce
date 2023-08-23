@@ -9,7 +9,9 @@ import {
   getProductByListCategorieID,
   getProductByID,
   getAllProducts,
-  getSupplierByProductByID
+  getSupplierByProductByID,
+  generateSlug,
+  getProductBySlug
 } from '../repositories/product.repository';
 import payload from '../payload';
 const fs = require('fs');
@@ -212,4 +214,12 @@ export const ImportProductService = async (file) => {
 
 export const getSupplierByProductByIDService = async (productId) => {
   return await getSupplierByProductByID(productId);
+};
+
+export const generateSlugService = async (productName) => {
+  return await generateSlug(productName);
+};
+
+export const getProductBySlugService = async (slug) => {
+  return await getProductBySlug(slug);
 };
