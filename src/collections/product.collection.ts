@@ -80,7 +80,34 @@ export const ProductCollection: CollectionConfig = {
       name: 'price_by_quantity',
       label: PRODUCT_TRANSLATION.price_by_quantity,
       type: 'array',
+      validate: (value, options) => {
+        const { price_by_quantity } = options.siblingData;
+        let inValidPriceRange = 0;
+        if (Array.isArray(price_by_quantity) && price_by_quantity?.length > 0) {
+          for (let i = 0; i < price_by_quantity.length; i++) {
+            if (i === 0 && price_by_quantity[i].min_quantity < 0) {
+              inValidPriceRange = 3;
+              break;
+            }
+            if ((price_by_quantity[i].max_quantity - (price_by_quantity[i].min_quantity + 1)) < 0) {
+              inValidPriceRange = 1;
+              break;
+            }
+            if (price_by_quantity?.length > 1 && i < price_by_quantity?.length - 1) {
+              if (price_by_quantity[i+1].min_quantity - price_by_quantity[i].max_quantity < 1) {
+                inValidPriceRange = 2;
+                break;
+              }
+            }
+          }
+        }
+        if (inValidPriceRange === 1 || inValidPriceRange === 2 || inValidPriceRange === 3) {
+          return 'Vui lòng điều chỉnh lại khoảng số lượng tối thiếu và tối da'
+        }
+        return true
+      },
       admin: {
+        description: 'Ex: [1-100] [101-200] [201-500]',
         condition: (data) => {
             if (data.product_is_same_price === true) {
               return true;
