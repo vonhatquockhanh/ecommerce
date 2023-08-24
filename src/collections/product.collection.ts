@@ -37,9 +37,15 @@ export const ProductCollection: CollectionConfig = {
     ],
   },
   fields: [
+    {
+      name: 'slug',
+      type: 'text',
+      admin: {
+        hidden: true,
+      }
+    },
     // Đặt các trường bắt buộc (required) trước
     { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
-    currencyField,
     {
       name: 'product_images',
       label: PRODUCT_TRANSLATION.product_images,
@@ -47,6 +53,8 @@ export const ProductCollection: CollectionConfig = {
       relationTo: MediaCollection.slug,
       required: true,
     },
+    currencyField,
+    { name: 'product_weigh', label: PRODUCT_TRANSLATION.product_weigh, type: 'number', required: false },
     { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
       name: 'variant',

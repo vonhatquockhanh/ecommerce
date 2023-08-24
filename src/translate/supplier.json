@@ -18,5 +18,30 @@
     "zh": "供应商描述",
     "vi": "Mô tả nhà cung cấp",
     "en": "Supplier description"
+  },
+  "supplier_bank_name": {
+    "zh": "银行名称",
+    "vi": "Tên Ngân hàng",
+    "en": "Bank Name"
+  },
+  "supplier_account_number": {
+    "zh": "账户号码",
+    "vi": "Số Tài khoản",
+    "en": "Account Number"
+  },
+  "supplier_qr_code": {
+    "zh": "二维码",
+    "vi": "Mã QR Code",
+    "en": "QR Code"
+  },
+  "supplier_account_holder_name": {
+    "zh": "账户持有人姓名",
+    "vi": "Tên chủ tài khoản",
+    "en": "Account Holder's Name"
+  },
+  "supplier_branch": {
+    "zh": "分行",
+    "vi": "Chi nhánh",
+    "en": "Branch"
   }
 }
