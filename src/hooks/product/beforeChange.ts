@@ -28,18 +28,12 @@ str = str.replace(/Đ/g, 'D');
 return str;
 };
 
-export const generateProductSlug: BeforeChangeHook = async ({ data, req }) => {
+export const generateProductSlug: BeforeChangeHook = async ({ data, req, operation }) => {
+  const productName = data.product_name;
+  let sanitizedProductName = removeUnicode(productName.trim());
+  sanitizedProductName = ConvertToSlug(sanitizedProductName);
+  if (operation === 'create' || (operation === 'update' && sanitizedProductName !== data.slug)) {
     const payload = req.payload;
-    const productName = data.product_name;
-    let sanitizedProductName = removeUnicode(productName.trim());
-    sanitizedProductName = ConvertToSlug(sanitizedProductName);
-    
-    productName
-      .toLowerCase()                     // Convert to lower case
-      .replace(/[^\w\s]/g, '')           // Remove punctuation marks
-      .replace(/\s+/g, '-')              // Replace whitespace with -
-      .trim();                           // Remove leading and trailing spaces
-  
     let newSlug = sanitizedProductName;
     let counter = 1;
   
@@ -57,4 +51,5 @@ export const generateProductSlug: BeforeChangeHook = async ({ data, req }) => {
       newSlug = `${sanitizedProductName}-${counter}`;
       counter++;
     }
+  }
 }
