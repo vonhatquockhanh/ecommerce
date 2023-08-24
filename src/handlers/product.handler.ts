@@ -196,7 +196,7 @@ export const generateSlugHandler = async (req, res) => {
 
 export const getProductBySlugHandler = async (req, res) => {
   try {
-    const posts = await getProductBySlugService(req.query.slug);
+    const posts = await getProductBySlugService(req.params.slug);
     if (!posts) {
       const body = { errors: [{ message: 'Not Found' }] };
       return res.status(404).json(body).end();

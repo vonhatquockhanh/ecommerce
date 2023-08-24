@@ -305,12 +305,6 @@ export const getSupplierByProductByID = async productId => {
 export const generateSlug = async (productName) => {
   let sanitizedProductName = removeUnicode(productName.trim());
   sanitizedProductName = ConvertToSlug(sanitizedProductName);
-  
-  productName
-    .toLowerCase()                     // Convert to lower case
-    .replace(/[^\w\s]/g, '')           // Remove punctuation marks
-    .replace(/\s+/g, '-')              // Replace whitespace with -
-    .trim();                           // Remove leading and trailing spaces
 
   let newSlug = sanitizedProductName;
   let counter = 1;
@@ -330,11 +324,15 @@ export const generateSlug = async (productName) => {
   }
 };
 
-export const getProductBySlug = async slug => {
-  return await payload.find({
+export const getProductBySlug = async (slug) => {
+  console.log(slug);
+  
+  const prod = await payload.find({
     collection: 'product',
     where: { slug: { equals: slug } },
   });
+
+  return prod;
 };
 
 export const ConvertToSlug = (text: string) => {

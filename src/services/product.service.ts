@@ -221,5 +221,9 @@ export const generateSlugService = async (productName) => {
 };
 
 export const getProductBySlugService = async (slug) => {
-  return await getProductBySlug(slug);
+  const prod = await getProductBySlug(slug);
+  if (prod.docs.length < 1) {
+    return null;
+  }
+  return prod.docs[0];
 };
