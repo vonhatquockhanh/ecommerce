@@ -4,16 +4,13 @@ import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
 import { VariantCollection } from './variant.collection';
 import { ProductSectionCollection } from './product-section.collection';
-import { isAdminOrCreatedBySupplier, isAdminOrCreatedBySupplierProduct } from '../access/supplier';
-import { UserCollection } from './user.colection';
+import { isAdminOrCreatedBySupplierProduct } from '../access/supplier';
 import { SupplierCollection } from './supplier.collection';
 import { isAdmin } from '../access/admins';
 import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
-import { generateSlug } from '../repositories/product.repository';
-import { requests } from '../payload/admin/api';
-import payload from '../payload';
 import { generateProductSlug } from '../hooks/product/beforeChange';
+import ProductImageCellView from '../ListView/ProductImageCellView';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -53,10 +50,16 @@ export const ProductCollection: CollectionConfig = {
     { name: 'product_name', label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
     {
       name: 'product_images',
-      label: PRODUCT_TRANSLATION.product_images,
+      label: 'Thumbnail',
       type: 'upload',
       relationTo: MediaCollection.slug,
       required: true,
+      maxDepth: 10,
+      admin: {
+        components: {
+          Cell: ProductImageCellView,
+        }
+      }
     },
     currencyField,
     { name: 'product_weigh', label: PRODUCT_TRANSLATION.product_weigh, type: 'number', required: false },
@@ -232,4 +235,16 @@ export const ProductCollection: CollectionConfig = {
     update: isAdminOrCreatedBySupplierProduct,
     delete: isAdminOrCreatedBySupplierProduct,
   },
+  endpoints: [
+    {
+      path: '/',
+      method: 'get',
+      handler: [
+        async (req, res, next) => {
+          req.query['depth'] = "1";
+          return next();
+        },
+      ],
+    },
+  ],
 };
