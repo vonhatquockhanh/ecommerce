@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const createOrder = async (token, data) => {
   try {
-    const profileUser = await axios.get(`${process.env.DOMAIN_AEYES_URL}/api/v1/auth/customer/me`, {
+    const profileUser = await axios.post(`${process.env.DOMAIN_AEYES_URL}/api/v1/auth/customer/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
