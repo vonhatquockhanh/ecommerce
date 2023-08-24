@@ -10,6 +10,10 @@ import { SupplierCollection } from './supplier.collection';
 import { isAdmin } from '../access/admins';
 import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
+import { generateSlug } from '../repositories/product.repository';
+import { requests } from '../payload/admin/api';
+import payload from '../payload';
+import { generateProductSlug } from '../hooks/product/beforeChange';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -19,7 +23,7 @@ export const ProductCollection: CollectionConfig = {
   labels: { singular: PRODUCT_TRANSLATION.product, plural: PRODUCT_TRANSLATION.product },
   hooks: {
     beforeChange: [
-      ({ req, operation, data }) => {
+      async ({ req, operation, data }) => {
         if (operation === 'create') {
           if (req.user && req.user.role === 'supplier') {
             data.supplierId = req.user.supplier.id;
@@ -27,13 +31,14 @@ export const ProductCollection: CollectionConfig = {
           }
         }
       },
+      generateProductSlug,
     ],
     beforeValidate: [
       ({ data, req, operation, originalDoc }) => {
         if (req.user.role !== 'supplier' && !data.supplierId) {
           throw new Error('Vui lòng chọn nhà cung cấp');
         }
-      }
+      },
     ],
   },
   fields: [
@@ -42,10 +47,10 @@ export const ProductCollection: CollectionConfig = {
       type: 'text',
       admin: {
         hidden: true,
-      }
+      },
     },
     // Đặt các trường bắt buộc (required) trước
-    { name: 'product_name',label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
+    { name: 'product_name', label: PRODUCT_TRANSLATION.product_name, type: 'text', required: true },
     {
       name: 'product_images',
       label: PRODUCT_TRANSLATION.product_images,
@@ -71,7 +76,7 @@ export const ProductCollection: CollectionConfig = {
         },
         // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
         { name: 'price', label: 'Price', type: 'number', required: true },
-        { name: 'stock', label: 'Stock', type: 'number', required: false},
+        { name: 'stock', label: 'Stock', type: 'number', required: false },
       ],
     },
 
@@ -96,12 +101,12 @@ export const ProductCollection: CollectionConfig = {
               inValidPriceRange = 3;
               break;
             }
-            if ((price_by_quantity[i].max_quantity - (price_by_quantity[i].min_quantity + 1)) < 0) {
+            if (price_by_quantity[i].max_quantity - (price_by_quantity[i].min_quantity + 1) < 0) {
               inValidPriceRange = 1;
               break;
             }
             if (price_by_quantity?.length > 1 && i < price_by_quantity?.length - 1) {
-              if (price_by_quantity[i+1].min_quantity - price_by_quantity[i].max_quantity < 1) {
+              if (price_by_quantity[i + 1].min_quantity - price_by_quantity[i].max_quantity < 1) {
                 inValidPriceRange = 2;
                 break;
               }
@@ -109,40 +114,57 @@ export const ProductCollection: CollectionConfig = {
           }
         }
         if (inValidPriceRange === 1 || inValidPriceRange === 2 || inValidPriceRange === 3) {
-          return 'Vui lòng điều chỉnh lại khoảng số lượng tối thiếu và tối da'
+          return 'Vui lòng điều chỉnh lại khoảng số lượng tối thiếu và tối da';
         }
-        return true
+        return true;
       },
       admin: {
         description: 'Ex: [1-100] [101-200] [201-500]',
-        condition: (data) => {
-            if (data.product_is_same_price === true) {
-              return true;
-            } else {
-              return false;
-            }
-
-        }
+        condition: data => {
+          if (data.product_is_same_price === true) {
+            return true;
+          } else {
+            return false;
+          }
+        },
       },
       fields: [
-        { name: 'min_quantity', label: 'Minimum Quantity', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === true && !value) {
-            return options.t('error:pleaseEnterThisField')
-          }
-          return true
-        } },
-        { name: 'max_quantity', label: 'Maximum Quantity', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === true && !value) {
-            return options.t('error:pleaseEnterThisField')
-          }
-          return true
-        } },
-        { name: 'price', label: 'Price', type: 'number', required: true, validate: (value, options) => {
-          if(options.data.product_is_same_price === true && !value) {
-            return options.t('error:pleaseEnterThisField')
-          }
-          return true
-        } },
+        {
+          name: 'min_quantity',
+          label: 'Minimum Quantity',
+          type: 'number',
+          required: true,
+          validate: (value, options) => {
+            if (options.data.product_is_same_price === true && !value) {
+              return options.t('error:pleaseEnterThisField');
+            }
+            return true;
+          },
+        },
+        {
+          name: 'max_quantity',
+          label: 'Maximum Quantity',
+          type: 'number',
+          required: true,
+          validate: (value, options) => {
+            if (options.data.product_is_same_price === true && !value) {
+              return options.t('error:pleaseEnterThisField');
+            }
+            return true;
+          },
+        },
+        {
+          name: 'price',
+          label: 'Price',
+          type: 'number',
+          required: true,
+          validate: (value, options) => {
+            if (options.data.product_is_same_price === true && !value) {
+              return options.t('error:pleaseEnterThisField');
+            }
+            return true;
+          },
+        },
       ],
     },
     {
@@ -178,7 +200,6 @@ export const ProductCollection: CollectionConfig = {
       label: PRODUCT_TRANSLATION.product_section,
       type: 'relationship',
       relationTo: ProductSectionCollection.slug,
-      required: true,
       hasMany: true,
     },
 
