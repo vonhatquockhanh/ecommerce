@@ -29,7 +29,10 @@ export const createOrder = async (token, data) => {
       supplierId = productInfo?.supplierId?.id;
     }
 
+    const newOrderId = await generateOrderId();
+
     const bodyInput = Object.assign(data, {
+      order_id: newOrderId,
       userId: profileUser?.data?._id,
       first_name: profileUser?.data?.first_name,
       last_name: profileUser?.data?.last_name,
@@ -69,4 +72,44 @@ export const getOrderByUser = async (token, page = 1, limit = 10) => {
   });
 
   return orders;
+};
+
+export const generateOrderId = async () => {
+  try {
+    const counterData = await payload.find({
+      collection: 'counter',
+      where: { collection_name: { equals: 'order' } },
+      limit: 1,
+    });
+
+    let newSeq = 0;
+
+    if (!counterData || !counterData.docs || !counterData.docs.length) {
+      newSeq = 1;
+
+      await payload.create({
+        collection: 'counter',
+        data: {
+          collection_name: 'order',
+          seq: newSeq,
+        },
+      });
+    } else {
+      newSeq = Number(counterData.docs[0].seq) + 1;
+
+      await payload.update({
+        collection: 'counter',
+        id: counterData.docs[0].id,
+        data: { seq: newSeq },
+      });
+    }
+
+    // Construct the tracking number
+    const newOrderId = (nr, len = 6, chr = `0`) => `${nr}`.padStart(len, chr);
+
+    return `OID-${newOrderId(newSeq)}`;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };

@@ -40,6 +40,14 @@ export const OrderCollection: CollectionConfig = {
   },
   fields: [
     {
+      name: 'order_id',
+      label: "OID",
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
       name: 'tracking_number',
       label: SHIPMENT_TRANSLATION.tracking_number,
       type: 'text',

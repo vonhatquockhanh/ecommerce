@@ -11,6 +11,7 @@ import { BillingCollection } from './collections/billing.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
 import { SupplierCollection } from './collections/supplier.collection';
 import dotenv from 'dotenv';
+import { CounterCollection } from './collections/counter.collection';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 const categoryService = path.resolve(__dirname, './services/category.service');
@@ -38,6 +39,7 @@ export default buildConfig({
     BillingCollection,
     SupplierCollection,
     UserCollection,
+    CounterCollection
   ],
   admin: {
     webpack: config => {
