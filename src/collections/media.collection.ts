@@ -67,9 +67,9 @@ export const MediaCollection: CollectionConfig = {
     },
   ],
   access: {
-    read: isAdminOrCreatedBySupplierMedia,
-    create: isAdminOrCreatedBySupplierMedia,
-    update: isAdminOrCreatedBySupplierMedia,
-    delete: isAdminOrCreatedBySupplierMedia,
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
   },
 };
