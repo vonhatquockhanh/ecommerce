@@ -44,7 +44,7 @@ const Login: React.FC = () => {
   const onSuccess = (data) => {
     if (data.token) {
       setToken(data.token);
-      history.push(admin);
+      history.push('/admin/collections/product');
     }
   };
 
