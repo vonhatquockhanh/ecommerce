@@ -3,11 +3,11 @@ import axios from 'axios';
 
 export const createOrder = async (token, data) => {
   try {
-    const profileUser = await axios.post(`${process.env.DOMAIN_AEYES_URL}/api/v1/auth/customer/me`, {
+    const profileUser: any = await axios.post(`${process.env.DOMAIN_AEYES_URL}/api/v1/auth/customer/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    if (!profileUser?.data) {
+    if (!profileUser) {
       throw new Error('not found');
     }
 
@@ -33,11 +33,11 @@ export const createOrder = async (token, data) => {
 
     const bodyInput = Object.assign(data, {
       order_id: newOrderId,
-      userId: profileUser?.data?._id,
-      first_name: profileUser?.data?.first_name,
-      last_name: profileUser?.data?.last_name,
-      email: profileUser?.data?.email,
-      phone: profileUser?.data?.phone,
+      userId: profileUser?._id,
+      first_name: profileUser?.first_name,
+      last_name: profileUser?.last_name,
+      email: profileUser?.email,
+      phone: profileUser?.phone,
       supplierId: supplierId,
       total_price: totalPrice,
     });
