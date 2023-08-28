@@ -4,15 +4,11 @@ import { CategoriesCollection } from './categories.collection';
 import EditorField from '../components/ckEditor';
 import { VariantCollection } from './variant.collection';
 import { ProductSectionCollection } from './product-section.collection';
-import { isAdminOrCreatedBySupplier, isAdminOrCreatedBySupplierProduct } from '../access/supplier';
-import { UserCollection } from './user.colection';
+import { isAdminOrCreatedBySupplierProduct } from '../access/supplier';
 import { SupplierCollection } from './supplier.collection';
 import { isAdmin } from '../access/admins';
 import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
-import { generateSlug } from '../repositories/product.repository';
-import { requests } from '../payload/admin/api';
-import payload from '../payload';
 import { generateProductSlug } from '../hooks/product/beforeChange';
 
 export const ProductCollection: CollectionConfig = {
@@ -25,16 +21,19 @@ export const ProductCollection: CollectionConfig = {
     beforeChange: [
       async ({ req, operation, data }) => {
         if (operation === 'create') {
-          if (req.user && req.user.role === 'supplier') {
-            data.supplierId = req.user.supplier.id;
-            return data;
+          if (req.user) {
+            data.userId = req.user.id;
+            if (req.user.role === 'supplier') {
+              data.supplierId = req.user.supplier.id;
+              return data;
+            }
           }
         }
       },
       generateProductSlug,
     ],
     beforeValidate: [
-      ({ data, req, operation, originalDoc }) => {
+      ({ data, req }) => {
         if (req.user.role !== 'supplier' && !data.supplierId) {
           throw new Error('Vui lòng chọn nhà cung cấp');
         }
