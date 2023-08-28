@@ -12,6 +12,8 @@ import { ProductSectionCollection } from './collections/product-section.collecti
 import { SupplierCollection } from './collections/supplier.collection';
 import dotenv from 'dotenv';
 import { CounterCollection } from './collections/counter.collection';
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
+import { buildAdapter } from './utilities/s3Helper';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 const categoryService = path.resolve(__dirname, './services/category.service');
@@ -24,8 +26,6 @@ dotenv.config({
 let cors = ['http://103.162.20.221:3000', 'http://localhost:8080'];
 
 export default buildConfig({
-  // serverURL: 'http://localhost:8000',
-  // serverURL: 'https://admin.supply.aeyes.vn',
   serverURL: process.env.DOMAIN_URL,
   cors: cors,
   collections: [
@@ -58,10 +58,22 @@ export default buildConfig({
         },
       };
     },
+    
   },
   upload: {
     limits: {
       fileSize: 50000000, // 50MB, written in bytes
     },
   },
+  plugins: [
+    cloudStorage({
+      collections: {
+        media: {
+          adapter: buildAdapter(),
+          // prefix: 'assets',  
+          disableLocalStorage: true,
+        },
+      },
+    })
+  ]
 });

@@ -20,8 +20,8 @@ export const MediaCollection: CollectionConfig = {
     ],
   },
   upload: {
-    staticURL: '/media',
-    staticDir: 'media',
+    // staticURL: '/media',
+    // staticDir: 'media',
     imageSizes: [
       // {
       //   name: 'thumbnail',
