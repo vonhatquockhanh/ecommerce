@@ -11,7 +11,8 @@ import {
   getAllProductsService,
   getSupplierByProductByIDService,
   generateSlugService,
-  getProductBySlugService
+  getProductBySlugService,
+  getProductByTabService
 } from '../services/product.service';
 
 export const getProductByCategorieIDHandler = async (req, res) => {
@@ -208,3 +209,17 @@ export const getProductBySlugHandler = async (req, res) => {
     return res.status(400).json({ message: 'Error! An error occurred. Please try again later' }).end();
   }
 };
+
+export const getProductByTabHandler = async (req, res) => {
+  try {
+    const posts = await getProductByTabService(req.query?.categorieIds, req.query?.type, req.query?.page, req.query?.limit);
+    if (!posts) {
+      const body = { errors: [{ message: 'Not Found' }] };
+      return res.status(404).json(body).end();
+    }
+
+    return res.status(200).json(posts).end();
+  } catch (error) {
+    console.log(error);
+  }
+}

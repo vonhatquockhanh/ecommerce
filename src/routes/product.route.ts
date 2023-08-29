@@ -9,7 +9,8 @@ import {
   getProductByIDHandler,
   getSupplierByProductByIDHandler,
   generateSlugHandler,
-  getProductBySlugHandler
+  getProductBySlugHandler,
+  getProductByTabHandler
 } from '../handlers/product.handler';
 
 const express = require('express');
@@ -57,6 +58,10 @@ router.get('/generateSlug', async function (_, res) {
 
 router.get('/products/getProductBySlug/:slug', async function (_, res) {
   return await getProductBySlugHandler(_, res);
+});
+
+router.get('/getProductByTab', async function (_, res) {
+  return await getProductByTabHandler(_, res);
 });
 
 export default router;
