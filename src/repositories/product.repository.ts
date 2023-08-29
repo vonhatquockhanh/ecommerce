@@ -362,3 +362,78 @@ export const removeUnicode = (str: string) => {
   str = str.replace(/Đ/g, 'D');
   return str;
 };
+
+export const getProductByTab = async (categorieIds = "", type, page = 1, limit = 10) => {
+  if (type === 'ARRIVED_ITEM') {
+    return await payload.find({
+      collection: 'product',
+      page: page,
+      limit: limit,
+      sort: '-createdAt',
+    });
+  } else if (type === 'BEST_SELLING_PRODUCT') {
+    const listOrder = await payload.find({
+      collection: 'order',
+      limit: 1000000,
+    });
+
+    if (!listOrder || !listOrder?.docs?.length) {
+      return {
+        docs: [],
+      };
+    }
+
+    const _idArray = listOrder.docs.map((item: any) => new mongoose.Types.ObjectId(item.product.id));
+
+    return await payload.find({
+      collection: 'product',
+      where: { _id: { in: _idArray } },
+      page: page,
+      limit: limit,
+      sort: '-createdAt',
+    });
+  } else if (type === 'RECOMMENDED_PRODUCT') {
+    if (!categorieIds || categorieIds.trim() === '' || categorieIds.trim() === '[]') {
+      return {
+        docs: [],
+      };
+    }
+
+    const temp = categorieIds
+      .slice(1, -1)
+      .split(',')
+      .map(id => id.trim());
+
+    // list categories ids
+    const _idArray = temp.map(id => new mongoose.Types.ObjectId(id));
+
+    if (_idArray && _idArray.length) {
+      const categories = await payload.find({
+        collection: 'categories',
+        where: {
+          or: [{ parent_categories: { in: _idArray } }, { _id: { in: _idArray } }],
+        },
+      });
+
+      if (categories && categories?.docs?.length) {
+        const products = await payload.find({
+          collection: 'product',
+          where: { product_categories: { in: categories.docs.map(x => x.id) } },
+          page: page,
+          limit: limit,
+          sort: '-createdAt',
+        });
+
+        return products;
+      }
+
+      return {
+        docs: [],
+      };
+    }
+  }
+
+  return {
+    docs: [],
+  };
+};

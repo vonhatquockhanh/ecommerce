@@ -11,7 +11,8 @@ import {
   getAllProducts,
   getSupplierByProductByID,
   generateSlug,
-  getProductBySlug
+  getProductBySlug,
+  getProductByTab
 } from '../repositories/product.repository';
 import payload from '../payload';
 const fs = require('fs');
@@ -226,4 +227,12 @@ export const getProductBySlugService = async (slug) => {
     return null;
   }
   return prod.docs[0];
+};
+
+export const getProductByTabService = async (categorieIds = "", type, page = 1, limit = 10) => {
+  const prod = await getProductByTab(categorieIds, type, page, limit);
+  if (prod.docs.length < 1) {
+    return null;
+  }
+  return prod;
 };
