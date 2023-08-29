@@ -13,7 +13,7 @@ export const ProductSectionCollection: CollectionConfig = {
     { name: 'product_section_description', label: PRODUCT_TRANSLATION.product_section_description, type: 'textarea', required: false },
   ],
   access: {
-    read: () => true,
+    read: isAdmin,
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,

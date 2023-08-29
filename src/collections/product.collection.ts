@@ -200,6 +200,9 @@ export const ProductCollection: CollectionConfig = {
       type: 'relationship',
       relationTo: ProductSectionCollection.slug,
       hasMany: true,
+      access: {
+        read: isAdmin
+      },
     },
 
     { name: 'product_sale_price', label: PRODUCT_TRANSLATION.product_sale_price, type: 'number' },
