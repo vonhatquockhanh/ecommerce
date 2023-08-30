@@ -113,7 +113,7 @@
     "passwordsDoNotMatch": "Mật khẩu không trùng.",
     "relatedDocument": "bản tài liệu liên quan",
     "relationTo": "Có quan hệ với",
-    "removeReelationship": "Xóa mối quan hệ",
+    "removeRelationship": "Xóa mối quan hệ",
     "removeUpload": "Xóa bản tải lên",
     "saveChanges": "Luu thay đổi",
     "searchForBlock": "Tìm block",
@@ -122,7 +122,8 @@
     "swapRelationship": "Hoán đổi quan hệ",
     "swapUpload": "Đổi bản tải lên",
     "toggleBlock": "Bật/tắt block",
-    "uploadNewLabel": "Tải lên bản mới: {{label}}"
+    "uploadNewLabel": "Tải lên bản mới: {{label}}",
+    "bank": "Ngân hàng"
   },
   "general": {
     "aboutToDelete": "Chuẩn bị xóa {{label}} <1>{{title}}</1>. Bạn có muốn tiếp tục không?",
