@@ -10,6 +10,7 @@ import { isAdmin } from '../access/admins';
 import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
 import { generateProductSlug } from '../hooks/product/beforeChange';
+import { UserCollection } from './user.colection';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -22,7 +23,7 @@ export const ProductCollection: CollectionConfig = {
       async ({ req, operation, data }) => {
         if (operation === 'create') {
           if (req.user) {
-            data.userId = req.user.id;
+            data.createdBy = req.user.id;
             if (req.user.role === 'supplier') {
               data.supplierId = req.user.supplier.id;
               return data;
@@ -225,6 +226,26 @@ export const ProductCollection: CollectionConfig = {
       admin: {
         readOnly: false,
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'createdBy',
+      type: 'relationship',
+      relationTo: UserCollection.slug,
+      filterOptions: () => {
+        return {
+          role: { equals: 'supplier' },
+        };
+      },
+      access: {
+        update: isAdmin,
+        read: isAdmin,
+        create: isAdmin,
+      },
+      admin: {
+        readOnly: false,
+        position: 'sidebar',
+        allowCreate: false
       },
     },
   ],

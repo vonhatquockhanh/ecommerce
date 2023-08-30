@@ -9,7 +9,7 @@ export const UserCollection: CollectionConfig = {
   auth: true,
   labels: { singular: USER_TRANSLATION.user, plural: USER_TRANSLATION.user },
   admin: {
-    useAsTitle: 'user_name',
+    useAsTitle: 'name',
   },
   fields: [
     {
