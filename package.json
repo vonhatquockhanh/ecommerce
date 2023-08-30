@@ -125,6 +125,7 @@
     "url-loader": "^4.1.1",
     "use-context-selector": "^1.4.1",
     "uuid": "^8.3.2",
+    "vietqr": "^1.1.9",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^4.10.0",
