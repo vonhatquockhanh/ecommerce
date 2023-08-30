@@ -11,6 +11,7 @@ import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
 import { generateProductSlug } from '../hooks/product/beforeChange';
 import ProductImageCellView from '../ListView/ProductImageCellView';
+import { UserCollection } from './user.colection';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -22,16 +23,19 @@ export const ProductCollection: CollectionConfig = {
     beforeChange: [
       async ({ req, operation, data }) => {
         if (operation === 'create') {
-          if (req.user && req.user.role === 'supplier') {
-            data.supplierId = req.user.supplier.id;
-            return data;
+          if (req.user) {
+            data.createdBy = req.user.id;
+            if (req.user.role === 'supplier') {
+              data.supplierId = req.user.supplier.id;
+              return data;
+            }
           }
         }
       },
       generateProductSlug,
     ],
     beforeValidate: [
-      ({ data, req, operation, originalDoc }) => {
+      ({ data, req }) => {
         if (req.user.role !== 'supplier' && !data.supplierId) {
           throw new Error('Vui lòng chọn nhà cung cấp');
         }
@@ -204,6 +208,9 @@ export const ProductCollection: CollectionConfig = {
       type: 'relationship',
       relationTo: ProductSectionCollection.slug,
       hasMany: true,
+      access: {
+        read: isAdmin
+      },
     },
 
     { name: 'product_sale_price', label: PRODUCT_TRANSLATION.product_sale_price, type: 'number' },
@@ -226,6 +233,26 @@ export const ProductCollection: CollectionConfig = {
       admin: {
         readOnly: false,
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'createdBy',
+      type: 'relationship',
+      relationTo: UserCollection.slug,
+      filterOptions: () => {
+        return {
+          role: { equals: 'supplier' },
+        };
+      },
+      access: {
+        update: isAdmin,
+        read: isAdmin,
+        create: isAdmin,
+      },
+      admin: {
+        readOnly: false,
+        position: 'sidebar',
+        allowCreate: false
       },
     },
   ],

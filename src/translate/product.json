@@ -88,5 +88,10 @@
     "zh": "称重",
     "vi": "Khối lượng",
     "en": "Product weigh"
+  },
+  "product_unit": {
+    "zh": "单元",
+    "vi": "Đơn vị",
+    "en": "Unit"
   }
 }
