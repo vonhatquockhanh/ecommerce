@@ -41,7 +41,7 @@ export const BillingCollection: CollectionConfig = {
 
   ],
   access: {
-    read: isAdmin,
+    read: () => false,
     create: isAdmin,
     update:  isAdmin,
     delete:  isAdmin,

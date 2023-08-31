@@ -37,7 +37,7 @@ export const createOrder = async (token, data) => {
       first_name: profileUser?.data?.first_name,
       last_name: profileUser?.data?.last_name,
       email: profileUser?.data?.email,
-      phone: profileUser?.data?.phone,
+      phone: profileUser?.data?.phone ?? data?.phoneNumber,
       supplierId: supplierId,
       total_price: totalPrice,
     });

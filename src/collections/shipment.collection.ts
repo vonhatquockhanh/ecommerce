@@ -82,7 +82,7 @@ export const ShipmentCollection: CollectionConfig = {
     },
   ],
   access: {
-    read: isAdmin,
+    read: () => false,
     create: isAdmin,
     update:  isAdmin,
     delete:  isAdmin,

@@ -83,6 +83,11 @@ export const OrderCollection: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'fullAddress',
+      label: ORDER_TRANSLATION.full_address,
+      type: 'textarea',
+    },
+    {
       name: 'product',
       label: PRODUCT_TRANSLATION.product,
       type: 'relationship',
