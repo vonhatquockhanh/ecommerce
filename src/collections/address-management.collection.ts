@@ -1,7 +1,7 @@
 import { CollectionConfig } from '../payload/collections/config/types';
 
 export const AddressManagementCollection: CollectionConfig = {
-  slug: 'addressManagement',
+  slug: 'address_management',
   admin: {
     useAsTitle: 'recipient_name',
   },
@@ -14,6 +14,14 @@ export const AddressManagementCollection: CollectionConfig = {
     { name: 'wardId', label: 'Phường/Xã', type: 'text' },
     { name: 'address', label: 'Địa chỉ', type: 'text' },
     { name: 'fullAddress', label: 'Địa chỉ đầy đủ', type: 'text', hidden: true },
+    {
+      name: 'userId',
+      label: 'userId',
+      type: 'text',
+      admin: {
+        disabled: true
+      }
+    },
   ],
   access: {
     read: () => true,
