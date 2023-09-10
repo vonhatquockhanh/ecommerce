@@ -17,9 +17,6 @@ export const AddressManagementCollection: CollectionConfig = {
       name: 'fullAddress',
       label: 'Địa chỉ đầy đủ',
       type: 'text',
-      admin: {
-        disabled: true,
-      },
     },
     {
       name: 'userId',
@@ -37,4 +34,3 @@ export const AddressManagementCollection: CollectionConfig = {
     delete: () => true,
   },
 };
-
