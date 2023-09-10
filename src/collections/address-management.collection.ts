@@ -13,21 +13,28 @@ export const AddressManagementCollection: CollectionConfig = {
     { name: 'districtId', label: 'Quận/Huyện', type: 'text' },
     { name: 'wardId', label: 'Phường/Xã', type: 'text' },
     { name: 'address', label: 'Địa chỉ', type: 'text' },
-    { name: 'fullAddress', label: 'Địa chỉ đầy đủ', type: 'text', hidden: true },
+    {
+      name: 'fullAddress',
+      label: 'Địa chỉ đầy đủ',
+      type: 'text',
+      admin: {
+        disabled: true,
+      },
+    },
     {
       name: 'userId',
       label: 'userId',
       type: 'text',
       admin: {
-        disabled: true
-      }
+        disabled: true,
+      },
     },
   ],
   access: {
     read: () => true,
     create: () => true,
-    update:  () => true,
-    delete:  () => true,
+    update: () => true,
+    delete: () => true,
   },
 };
 
