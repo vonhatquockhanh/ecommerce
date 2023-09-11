@@ -4,6 +4,7 @@ import { isAdminOrCreatedBySupplier } from '../access/supplier';
 import { CollectionConfig, TypeWithID } from '../payload/collections/config/types';
 import { FieldHook } from '../payload/fields/config/types';
 import { ORDER_TRANSLATION, PRODUCT_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
+import { AddressManagementCollection } from './address-management.collection';
 import { SupplierCollection } from './supplier.collection';
 import { VariantCollection } from './variant.collection';
 
@@ -93,6 +94,12 @@ export const OrderCollection: CollectionConfig = {
       type: 'relationship',
       relationTo: 'product',
       required: true,
+    },
+    {
+      name: 'addressId',
+      label: 'User Address',
+      type: 'relationship',
+      relationTo: AddressManagementCollection.slug,
     },
     {
       name: 'variant',

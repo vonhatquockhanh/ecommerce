@@ -10,6 +10,7 @@ import { ShipmentCollection } from './collections/shipment.collection';
 import { BillingCollection } from './collections/billing.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
 import { SupplierCollection } from './collections/supplier.collection';
+import { AddressManagementCollection } from './collections/address-management.collection';
 import dotenv from 'dotenv';
 import { CounterCollection } from './collections/counter.collection';
 
@@ -38,8 +39,9 @@ export default buildConfig({
     ShipmentCollection,
     BillingCollection,
     SupplierCollection,
+    AddressManagementCollection,
     UserCollection,
-    CounterCollection
+    CounterCollection,
   ],
   admin: {
     webpack: config => {
