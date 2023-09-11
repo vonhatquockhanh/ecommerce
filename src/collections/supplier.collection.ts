@@ -12,8 +12,14 @@ export const SupplierCollection: CollectionConfig = {
   fields: [
     { name: 'supplier_name', label: SUPPLIER_TRANSLATION.supplier_name, type: 'text', required: true },
     VietqrField,
-    { name: 'bank_name', label: 'Ngân hàng', type: 'text', hidden: true },
-    { name: 'bank_short_name', label: 'Tên ngân hàng viết tắt', type: 'text', hidden: true },
+    {
+      name: 'product_percentage',
+      type: 'number',
+    },
+    { name: 'product_tags', label: SUPPLIER_TRANSLATION.product_tags, type: 'text' },
+
+    { name: 'bank_name', label: SUPPLIER_TRANSLATION.supplier_bank_name, type: 'text', hidden: true },
+    { name: 'bank_short_name', label: SUPPLIER_TRANSLATION.bank_short_name, type: 'text', hidden: true },
     { name: 'bank_bin', label: 'Bank BIN', type: 'text', hidden: true },
     {
       name: 'supplier_logo',
