@@ -1,3 +1,4 @@
+import { isAdmin } from '../access/admins';
 import { CollectionConfig } from '../payload/collections/config/types';
 import { CATEGORY_TRANSLATION } from '../translate';
 import { MediaCollection } from './media.collection';
@@ -25,6 +26,6 @@ export const CategoriesCollection: CollectionConfig = {
     read: () => true,
     create: () => true,
     update:  () => true,
-    delete:  () => true,
+    delete:  isAdmin,
   },
 };

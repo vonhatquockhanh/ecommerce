@@ -43,5 +43,15 @@
     "zh": "分行",
     "vi": "Chi nhánh",
     "en": "Branch"
+  },
+  "product_tags": {
+    "zh": "产品标签",
+    "vi": "Thẻ sản phẩm",
+    "en": "Product tags"
+  },
+  "bank_short_name": {
+    "zh": "银行短名",
+    "vi": "Tên Ngân Hàng viết tắt",
+    "en": "Bank short name"
   }
 }

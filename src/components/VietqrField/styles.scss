@@ -1,0 +1,8 @@
+.field-bank {
+    position: relative;
+    .field-error {
+        & + .field-label + .field-type.select .react-select > div {
+            background-color: var(--theme-error-200);
+        }
+    }
+}

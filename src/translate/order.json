@@ -28,5 +28,10 @@
     "zh": "支付状态/付款状态",
     "vi": "Trạng thái thanh toán",
     "en": "Payment status"
+  },
+  "full_address": {
+    "zh": "地址",
+    "vi": "Địa chỉ",
+    "en": "Address"
   }
 }

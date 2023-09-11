@@ -1,0 +1,42 @@
+{
+  "address_management": {
+    "zh": "地址管理",
+    "vi": "Quản lý địa chỉ",
+    "en": "Address management"
+  },
+  "recipient_name": {
+    "zh": "收件人姓名",
+    "vi": "Tên người nhận",
+    "en": "Recipient name"
+  },
+  "phone_number": {
+    "zh": "电话",
+    "vi": "Số điện thoại",
+    "en": "Phone"
+  },
+  "city": {
+    "zh": "城市",
+    "vi": "Tỉnh/Thành phố",
+    "en": "City"
+  },
+  "district": {
+    "zh": "地区",
+    "vi": "Quận/Huyện",
+    "en": "District"
+  },
+  "ward": {
+    "zh": "病房",
+    "vi": "Phường/Xã",
+    "en": "Ward"
+  },
+  "address": {
+    "zh": "地址",
+    "vi": "Địa chỉ",
+    "en": "Address"
+  },
+  "fullAddress": {
+    "zh": "完整地址",
+    "vi": "Địa chỉ đầy đủ",
+    "en": "Full Address"
+  }
+}

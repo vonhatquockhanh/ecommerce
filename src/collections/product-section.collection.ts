@@ -1,3 +1,4 @@
+import { isAdmin } from '../access/admins';
 import { CollectionConfig } from '../payload/collections/config/types';
 import { PRODUCT_TRANSLATION } from '../translate';
 
@@ -12,9 +13,9 @@ export const ProductSectionCollection: CollectionConfig = {
     { name: 'product_section_description', label: PRODUCT_TRANSLATION.product_section_description, type: 'textarea', required: false },
   ],
   access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    read: isAdmin,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
 };

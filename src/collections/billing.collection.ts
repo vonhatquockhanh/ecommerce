@@ -1,3 +1,4 @@
+import { isAdmin } from '../access/admins';
 import { CollectionConfig } from '../payload/collections/config/types';
 import { BILLING_TRANSLATION } from '../translate';
 
@@ -40,9 +41,9 @@ export const BillingCollection: CollectionConfig = {
 
   ],
   access: {
-    read: () => true,
-    create: () => true,
-    update:  () => true,
-    delete:  () => true,
+    read: () => false,
+    create: isAdmin,
+    update:  isAdmin,
+    delete:  isAdmin,
   },
 };
