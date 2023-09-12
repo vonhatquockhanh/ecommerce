@@ -329,6 +329,9 @@
         },
         "pleaseEnterThisField": {
           "type": "string"
+        },
+        "invalidPercent": {
+          "type": "string"
         }
       },
       "required": [
