@@ -15,6 +15,7 @@ export const SupplierCollection: CollectionConfig = {
     {
       name: 'product_percentage',
       type: 'number',
+      label: SUPPLIER_TRANSLATION.spread_percent
     },
     { name: 'product_tags', label: SUPPLIER_TRANSLATION.product_tags, type: 'text' },
 
