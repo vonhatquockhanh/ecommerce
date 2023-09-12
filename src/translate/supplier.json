@@ -53,5 +53,10 @@
     "zh": "银行短名",
     "vi": "Tên Ngân Hàng viết tắt",
     "en": "Bank short name"
+  },
+  "spread_percent": {
+    "zh": "传播百分比",
+    "vi": "Phần trăm chênh lệch",
+    "en": "spreadPercent"
   }
 }

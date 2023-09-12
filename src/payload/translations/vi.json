@@ -88,7 +88,8 @@
     "userLocked": "Lỗi- Tài khoản đã bị khóa do đăng nhập thất bại nhiều lần.",
     "valueMustBeUnique": "Lỗi - Giá trị không được trùng lặp.",
     "verificationTokenInvalid": "Lỗi - Token dùng để xác thực không hợp lệ.",
-    "pleaseEnterThisField": "Vui lòng điền vào trường này."
+    "pleaseEnterThisField": "Vui lòng điền vào trường này.",
+    "invalidPercent": "Phần trăm không hợp lệ"
   },
   "fields": {
     "block": "block",

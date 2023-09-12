@@ -332,6 +332,56 @@ export const getProductBySlug = async (slug) => {
     where: { slug: { equals: slug } },
   });
 
+  if (prod && prod.docs.length) {
+    const productPercentage = (prod.docs[0]?.supplierId as any)?.spread_percent ?? 0;
+    prod.docs[0]['product_tags'] = (prod.docs[0]?.supplierId as any)?.product_tags;
+
+    if (productPercentage !== 0) {
+      const productTotalPrice = prod.docs[0]?.product_total_price as number;
+
+      if (productTotalPrice !== undefined) {
+        const priceChange = (productTotalPrice * productPercentage) / 100;
+
+        // Check if product Percentage > 0, then increase the price, otherwise decrease the price
+        if (productPercentage > 0) {
+          prod.docs[0].product_total_price = productTotalPrice + priceChange;
+        } else {
+          prod.docs[0].product_total_price = productTotalPrice - priceChange;
+        }
+      }
+
+      // Recalculate the price in variant
+      if (prod.docs[0]?.variant && (prod.docs[0].variant as any).length > 0) {
+        for (const variantItem of (prod.docs[0].variant as any)) {
+          const variantPrice = variantItem.price as number;
+          const variantPriceChange = (variantPrice * productPercentage) / 100;
+
+          // Check if product Percentage > 0, then increase the price, otherwise decrease the price
+          if (productPercentage > 0) {
+            variantItem.price = variantPrice + variantPriceChange;
+          } else {
+            variantItem.price = variantPrice - variantPriceChange;
+          }
+        }
+      }
+
+      // Recalculate the price in price_by_quantity
+      if (prod.docs[0]?.price_by_quantity && (prod.docs[0].price_by_quantity  as any).length > 0) {
+        for (const priceByQuantityItem of (prod.docs[0].price_by_quantity as any)) {
+          const priceByQuantityPrice = priceByQuantityItem.price as number;
+          const priceByQuantityPriceChange = (priceByQuantityPrice * productPercentage) / 100;
+
+          // Check if productPercentage > 0, then increase the price, otherwise decrease the price
+          if (productPercentage > 0) {
+            priceByQuantityItem.price = priceByQuantityPrice + priceByQuantityPriceChange;
+          } else {
+            priceByQuantityItem.price = priceByQuantityPrice - priceByQuantityPriceChange;
+          }
+        }
+      }
+    }
+  }
+
   return prod;
 };
 
