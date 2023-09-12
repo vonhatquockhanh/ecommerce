@@ -12,11 +12,6 @@ export const SupplierCollection: CollectionConfig = {
   fields: [
     { name: 'supplier_name', label: SUPPLIER_TRANSLATION.supplier_name, type: 'text', required: true },
     VietqrField,
-    {
-      name: 'product_percentage',
-      type: 'number',
-      label: SUPPLIER_TRANSLATION.spread_percent
-    },
     { name: 'product_tags', label: SUPPLIER_TRANSLATION.product_tags, type: 'text' },
 
     { name: 'bank_name', label: SUPPLIER_TRANSLATION.supplier_bank_name, type: 'text', hidden: true },

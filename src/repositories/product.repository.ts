@@ -333,7 +333,7 @@ export const getProductBySlug = async (slug) => {
   });
 
   if (prod && prod.docs.length) {
-    const productPercentage = (prod.docs[0]?.supplierId as any)?.product_percentage ?? 0;
+    const productPercentage = (prod.docs[0]?.supplierId as any)?.spread_percent ?? 0;
     prod.docs[0]['product_tags'] = (prod.docs[0]?.supplierId as any)?.product_tags;
 
     if (productPercentage !== 0) {
