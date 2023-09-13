@@ -9,6 +9,50 @@ export const getCategoryBySlug = async slug => {
   return categories;
 };
 
+// export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
+//   const categories = await payload.find({
+//     collection: 'categories',
+//     limit: 1000000,
+//   });
+
+//   if (categories && categories.docs.length) {
+//     for (const category of categories.docs) {
+//       const categoriesToCheck = [category.id];
+//       const visitedCategories = new Set();
+//       let productCount = 0;
+
+//       while (categoriesToCheck.length > 0) {
+//         const categoryIdToCheck = categoriesToCheck.shift();
+//         if (!visitedCategories.has(categoryIdToCheck)) {
+//           visitedCategories.add(categoryIdToCheck);
+
+//           const childCategories = categories.docs.filter(
+//             c => (c.parent_categories as any)?.id === categoryIdToCheck
+//           );
+
+//           categoriesToCheck.push(...childCategories.map(c => c.id));
+
+//           const products = await payload.find({
+//             collection: 'product',
+//             where: { product_categories: { in: [categoryIdToCheck] } },
+//             limit: 1000000,
+//           });
+
+//           productCount += products.docs.length;
+//         }
+//       }
+
+//       category.productCount = productCount;
+//     }
+
+//     return categories;
+//   }
+
+//   return {
+//     docs: [],
+//   };
+// };
+
 export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
   const categories = await payload.find({
     collection: 'categories',
@@ -17,32 +61,16 @@ export const getAllCategoryAtLeastOneProduct = async (page = 1, limit = 10) => {
 
   if (categories && categories.docs.length) {
     for (const category of categories.docs) {
-      const categoriesToCheck = [category.id];
-      const visitedCategories = new Set();
-      let productCount = 0;
+      const hasProducts = await payload.find({
+        collection: 'product',
+        where: { product_categories: { in: [category.id] } },
+      });
 
-      while (categoriesToCheck.length > 0) {
-        const categoryIdToCheck = categoriesToCheck.shift();
-        if (!visitedCategories.has(categoryIdToCheck)) {
-          visitedCategories.add(categoryIdToCheck);
-
-          const childCategories = categories.docs.filter(
-            c => (c.parent_categories as any)?.id === categoryIdToCheck
-          );
-
-          categoriesToCheck.push(...childCategories.map(c => c.id));
-
-          const products = await payload.find({
-            collection: 'product',
-            where: { product_categories: { in: [categoryIdToCheck] } },
-            limit: 1000000,
-          });
-
-          productCount += products.docs.length;
-        }
+      if (hasProducts && hasProducts.docs.length) {
+        category.productCount = 1;
+      } else {
+        category.productCount = 0;
       }
-
-      category.productCount = productCount;
     }
 
     return categories;
