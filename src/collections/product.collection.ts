@@ -22,9 +22,6 @@ export const ProductCollection: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ req, operation, data }) => {
-        if (data.displayPrice) {
-          delete data.displayPrice;
-        }
         if (operation === 'create') {
           if (req.user) {
             data.createdBy = req.user.id;
