@@ -11,6 +11,7 @@ import { PRODUCT_TRANSLATION, VARIANT_TRANSLATION } from '../translate';
 import currencyField from '../components/CurrencyField/config';
 import { generateProductSlug } from '../hooks/product/beforeChange';
 import { UserCollection } from './user.colection';
+import DisplayPriceField from '../components/DisplayPriceField';
 
 export const ProductCollection: CollectionConfig = {
   slug: 'product',
@@ -21,6 +22,9 @@ export const ProductCollection: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ req, operation, data }) => {
+        if (data.displayPrice) {
+          delete data.displayPrice;
+        }
         if (operation === 'create') {
           if (req.user) {
             data.createdBy = req.user.id;
@@ -59,6 +63,18 @@ export const ProductCollection: CollectionConfig = {
       required: true,
     },
     currencyField,
+    {
+      name: 'displayPrice',
+      type: 'text',
+      admin: {
+        components: {
+          Field: DisplayPriceField,
+        },
+      },
+      access: {
+        read: isAdmin
+      }
+    },
     { name: 'product_weigh', label: PRODUCT_TRANSLATION.product_weigh, type: 'number', required: false },
     { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
