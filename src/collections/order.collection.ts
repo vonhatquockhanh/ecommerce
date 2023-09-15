@@ -144,7 +144,7 @@ export const OrderCollection: CollectionConfig = {
       }
     },
     {
-      name: 'product_images',
+      name: 'payment_voucher',
       label: 'Chứng từ thanh toán',
       type: 'upload',
       relationTo: PaymentVoucherCollection.slug,
