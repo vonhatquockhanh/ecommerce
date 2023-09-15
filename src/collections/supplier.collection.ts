@@ -14,9 +14,30 @@ export const SupplierCollection: CollectionConfig = {
     VietqrField,
     { name: 'product_tags', label: SUPPLIER_TRANSLATION.product_tags, type: 'text' },
 
-    { name: 'bank_name', label: SUPPLIER_TRANSLATION.supplier_bank_name, type: 'text', hidden: true },
-    { name: 'bank_short_name', label: SUPPLIER_TRANSLATION.bank_short_name, type: 'text', hidden: true },
-    { name: 'bank_bin', label: 'Bank BIN', type: 'text', hidden: true },
+    {
+      name: 'bank_name',
+      label: SUPPLIER_TRANSLATION.supplier_bank_name,
+      type: 'text',
+      admin: {
+        disabled: true,
+      },
+    },
+    {
+      name: 'bank_short_name',
+      label: SUPPLIER_TRANSLATION.bank_short_name,
+      type: 'text',
+      admin: {
+        disabled: true,
+      },
+    },
+    {
+      name: 'bank_bin',
+      label: 'Bank BIN',
+      type: 'text',
+      admin: {
+        disabled: true,
+      },
+    },
     {
       name: 'supplier_logo',
       label: SUPPLIER_TRANSLATION.supplier_logo,
