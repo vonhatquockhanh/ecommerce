@@ -1,4 +1,4 @@
-import { createOrder, getOrderByUser } from '../repositories/order.repository';
+import { createOrder, getOrderByUser, uploadPaymentVouchers } from '../repositories/order.repository';
 
 export const createOrderService = async (token, data) => {
   return await createOrder(token, data);;
@@ -10,4 +10,8 @@ export const getOrderByUserService = async (token, page = 1, limit = 10) => {
     return null;
   }
   return order;
+}
+
+export const uploadPaymentVoucherService = async (data) => {
+  return await uploadPaymentVouchers(data);;
 }

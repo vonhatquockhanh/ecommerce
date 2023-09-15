@@ -113,3 +113,42 @@ export const generateOrderId = async () => {
     return null;
   }
 };
+
+export const uploadPaymentVouchers = async data => {
+  try {
+    const { body, files } = data;
+    const supplierId = body?.supplierId;
+    const orderId = body?.orderId;
+    const file = files?.file;
+
+    const paymentVoucherCreated = await payload.create({
+      collection: 'payment_voucher',
+      data: {
+        supplierId: supplierId,
+      },
+      file: file
+    });
+
+    if (paymentVoucherCreated?.id) {
+      const orderExist:any = await payload.findByID({
+        collection: 'order',
+        id: orderId,
+      });
+
+      if (orderExist?.id) {
+        await payload.update({
+          collection: 'order',
+          id: orderId,
+          data: {
+            payment_voucher: paymentVoucherCreated.id
+          },
+        });
+      }
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+};
