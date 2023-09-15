@@ -20,8 +20,8 @@ export const PaymentVoucherCollection: CollectionConfig = {
     ],
   },
   upload: {
-    staticURL: '/voucher',
-    staticDir: 'voucher',
+    // staticURL: '/voucher',
+    // staticDir: 'voucher',
     imageSizes: [],
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*'],

@@ -77,6 +77,11 @@ export default buildConfig({
           // prefix: 'assets',  
           disableLocalStorage: true,
         },
+        payment_voucher: {
+          adapter: buildAdapter(),
+          // prefix: 'assets',  
+          disableLocalStorage: true,
+        },
       },
     })
   ]
