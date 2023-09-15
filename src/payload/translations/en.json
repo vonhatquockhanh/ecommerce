@@ -87,7 +87,9 @@
     "unspecific": "An error has occurred.",
     "userLocked": "This user is locked due to having too many failed login attempts.",
     "valueMustBeUnique": "Value must be unique",
-    "verificationTokenInvalid": "Verification token is invalid."
+    "verificationTokenInvalid": "Verification token is invalid.",
+    "pleaseEnterThisField": "Please enter this field",
+    "invalidPercent": "Invalid percent"
   },
   "fields": {
     "addLabel": "Add {{label}}",

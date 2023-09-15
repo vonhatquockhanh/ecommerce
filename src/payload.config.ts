@@ -11,6 +11,7 @@ import { BillingCollection } from './collections/billing.collection';
 import { ProductSectionCollection } from './collections/product-section.collection';
 import { SupplierCollection } from './collections/supplier.collection';
 import { AddressManagementCollection } from './collections/address-management.collection';
+import { PaymentVoucherCollection } from './collections/payment-voucher.collection';
 import dotenv from 'dotenv';
 import { CounterCollection } from './collections/counter.collection';
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
@@ -39,6 +40,7 @@ export default buildConfig({
     ShipmentCollection,
     BillingCollection,
     SupplierCollection,
+    PaymentVoucherCollection,
     AddressManagementCollection,
     UserCollection,
     CounterCollection,
@@ -71,6 +73,11 @@ export default buildConfig({
     cloudStorage({
       collections: {
         media: {
+          adapter: buildAdapter(),
+          // prefix: 'assets',  
+          disableLocalStorage: true,
+        },
+        payment_voucher: {
           adapter: buildAdapter(),
           // prefix: 'assets',  
           disableLocalStorage: true,

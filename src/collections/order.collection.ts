@@ -3,8 +3,9 @@ import { isAdmin, isAdminOrCreatedBy } from '../access/admins';
 import { isAdminOrCreatedBySupplier } from '../access/supplier';
 import { CollectionConfig, TypeWithID } from '../payload/collections/config/types';
 import { FieldHook } from '../payload/fields/config/types';
-import { ORDER_TRANSLATION, PRODUCT_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
+import { ORDER_TRANSLATION, PAYMENT_VOUCHER_TRANSLATION, PRODUCT_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
 import { AddressManagementCollection } from './address-management.collection';
+import { PaymentVoucherCollection } from './payment-voucher.collection';
 import { SupplierCollection } from './supplier.collection';
 import { VariantCollection } from './variant.collection';
 
@@ -143,10 +144,16 @@ export const OrderCollection: CollectionConfig = {
       }
     },
     {
+      name: 'payment_voucher',
+      label: PAYMENT_VOUCHER_TRANSLATION.title,
+      type: 'upload',
+      relationTo: PaymentVoucherCollection.slug,
+      required: false,
+    },
+    {
       name: 'supplierId',
       type: 'relationship',
       relationTo: SupplierCollection.slug,
-      // required: true,
       access: {
         update: isAdmin,
         read: isAdmin,
