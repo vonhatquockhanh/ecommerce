@@ -5,6 +5,7 @@ import { CollectionConfig, TypeWithID } from '../payload/collections/config/type
 import { FieldHook } from '../payload/fields/config/types';
 import { ORDER_TRANSLATION, PRODUCT_TRANSLATION, SHIPMENT_TRANSLATION } from '../translate';
 import { AddressManagementCollection } from './address-management.collection';
+import { PaymentVoucherCollection } from './payment-voucher.collection';
 import { SupplierCollection } from './supplier.collection';
 import { VariantCollection } from './variant.collection';
 
@@ -143,10 +144,16 @@ export const OrderCollection: CollectionConfig = {
       }
     },
     {
+      name: 'product_images',
+      label: 'Chứng từ thanh toán',
+      type: 'upload',
+      relationTo: PaymentVoucherCollection.slug,
+      required: false,
+    },
+    {
       name: 'supplierId',
       type: 'relationship',
       relationTo: SupplierCollection.slug,
-      // required: true,
       access: {
         update: isAdmin,
         read: isAdmin,

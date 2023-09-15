@@ -7,6 +7,7 @@ import ORDER_TRANSLATION from './order.json';
 import SHIPMENT_TRANSLATION from './shipment.json';
 import SUPPLIER_TRANSLATION from './supplier.json';
 import USER_TRANSLATION from './user.json';
+import PAYMENT_VOUCHER_TRANSLATION from './payment_voucher.json';
 import ADDRESS_MANAGEMENT_TRANSLATION from './address_management.json';
 
 export {
@@ -20,4 +21,5 @@ export {
     SUPPLIER_TRANSLATION,
     USER_TRANSLATION,
     ADDRESS_MANAGEMENT_TRANSLATION,
+    PAYMENT_VOUCHER_TRANSLATION,
 }
