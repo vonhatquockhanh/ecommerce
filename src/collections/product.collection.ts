@@ -72,7 +72,7 @@ export const ProductCollection: CollectionConfig = {
         read: isAdmin
       }
     },
-    { name: 'product_weigh', label: PRODUCT_TRANSLATION.product_weigh, type: 'number', required: false },
+    { name: 'product_weight', label: PRODUCT_TRANSLATION.product_weight, type: 'number', required: false },
     { name: 'product_is_same_price', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
     {
       name: 'variant',
@@ -90,6 +90,94 @@ export const ProductCollection: CollectionConfig = {
         // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
         { name: 'price', label: 'Price', type: 'number', required: true },
         { name: 'stock', label: 'Stock', type: 'number', required: false },
+        { name: 'product_is_same_price_variant', 
+          label: PRODUCT_TRANSLATION.is_same_price, 
+          type: 'checkbox', 
+          defaultValue: true, 
+          admin: {
+            disabled: true,
+          }
+        },
+        {
+          name: 'price_by_quantity_variant',
+          label: PRODUCT_TRANSLATION.price_by_quantity,
+          type: 'array',
+          validate: (value, options) => {
+            const { price_by_quantity_variant } = options.siblingData;
+            let inValidPriceRange = 0;
+            if (Array.isArray(price_by_quantity_variant) && price_by_quantity_variant?.length > 0) {
+              for (let i = 0; i < price_by_quantity_variant.length; i++) {
+                if (i === 0 && price_by_quantity_variant[i].min_quantity_variant < 0) {
+                  inValidPriceRange = 3;
+                  break;
+                }
+                if (price_by_quantity_variant[i].max_quantity_variant - (price_by_quantity_variant[i].min_quantity_variant + 1) < 0) {
+                  inValidPriceRange = 1;
+                  break;
+                }
+                if (price_by_quantity_variant?.length > 1 && i < price_by_quantity_variant?.length - 1) {
+                  if (price_by_quantity_variant[i + 1].min_quantity_variant - price_by_quantity_variant[i].max_quantity_variant < 1) {
+                    inValidPriceRange = 2;
+                    break;
+                  }
+                }
+              }
+            }
+            if (inValidPriceRange === 1 || inValidPriceRange === 2 || inValidPriceRange === 3) {
+              return 'Vui lòng điều chỉnh lại khoảng số lượng tối thiếu và tối da';
+            }
+            return true;
+          },
+          admin: {
+            description: 'Ex: [1-100] [101-200] [201-500]',
+            condition: data => {
+              // if (data.product_is_same_price_variant === true) {
+              //   return true;
+              // } else {
+              //   return false;
+              // }
+              return true;
+            },
+          },
+          fields: [
+            {
+              name: 'min_quantity_variant',
+              label: 'Minimum Quantity',
+              type: 'number',
+              required: true,
+              validate: (value, options) => {
+                if (options.data.product_is_same_price_variant === true && !value) {
+                  return options.t('error:pleaseEnterThisField');
+                }
+                return true;
+              },
+            },
+            {
+              name: 'max_quantity_variant',
+              label: 'Maximum Quantity',
+              type: 'number',
+              required: true,
+              validate: (value, options) => {
+                if (options.data.product_is_same_price_variant === true && !value) {
+                  return options.t('error:pleaseEnterThisField');
+                }
+                return true;
+              },
+            },
+            {
+              name: 'price_variant',
+              label: 'Price',
+              type: 'number',
+              required: true,
+              validate: (value, options) => {
+                if (options.data.product_is_same_price_variant === true && !value) {
+                  return options.t('error:pleaseEnterThisField');
+                }
+                return true;
+              },
+            },
+          ],
+        },
       ],
     },
 
