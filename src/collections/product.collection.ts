@@ -90,7 +90,14 @@ export const ProductCollection: CollectionConfig = {
         // { name: 'quantity', label: 'Quantity', type: 'number', required: true },
         { name: 'price', label: 'Price', type: 'number', required: true },
         { name: 'stock', label: 'Stock', type: 'number', required: false },
-        { name: 'product_is_same_price_variant', label: PRODUCT_TRANSLATION.is_same_price, type: 'checkbox', defaultValue: false },
+        { name: 'product_is_same_price_variant', 
+          label: PRODUCT_TRANSLATION.is_same_price, 
+          type: 'checkbox', 
+          defaultValue: true, 
+          admin: {
+            disabled: true,
+          }
+        },
         {
           name: 'price_by_quantity_variant',
           label: PRODUCT_TRANSLATION.price_by_quantity,
