@@ -311,7 +311,6 @@ export const ProductCollection: CollectionConfig = {
     { name: 'product_sale_percentage', label: PRODUCT_TRANSLATION.sale_percentage, type: 'number' },
     {
       name: 'product_description',
-      label: 'Mô tả sản phẩm',
       type: 'text',
       admin: { components: { Field: EditorField } },
     },

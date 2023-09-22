@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { CKEditor } from 'ckeditor4-react';
 import useField from '../../payload/admin/components/forms/useField';
+import { useTranslation } from 'react-i18next';
 
 type Props = { path: string; label: string; name: string; required: boolean };
 
 const EditorField: React.FC<Props> = (props: Props) => {
   const { path, label, name, required } = props;
   const { value, setValue } = useField<Props>({ path });
+  const { t } = useTranslation('fields');
   return (
     <div className="field-type text">
       <label className="field-label">
-        {label || name.toUpperCase()}
+        {t('product_description')}
         {required && <span className="required">*</span>}
       </label>
       <CKEditor

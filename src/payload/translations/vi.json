@@ -125,7 +125,8 @@
     "toggleBlock": "Bật/tắt block",
     "uploadNewLabel": "Tải lên bản mới: {{label}}",
     "bank": "Ngân hàng",
-    "displayPrice": "Giá hiển thị"
+    "displayPrice": "Giá hiển thị",
+    "product_description": "Mô tả sản phẩm"
   },
   "general": {
     "aboutToDelete": "Chuẩn bị xóa {{label}} <1>{{title}}</1>. Bạn có muốn tiếp tục không?",
