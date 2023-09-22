@@ -5,6 +5,7 @@ import { useFormFields, useWatchForm } from '../../payload/admin/components/form
 import { requests } from '../../payload/admin/api';
 import { useAuth } from '../../payload/admin/components/utilities/Auth';
 import payload from '../../payload';
+import { useTranslation } from 'react-i18next';
 
 function formatAmount(amount: string): string {
     if (!amount) return '';
@@ -14,6 +15,7 @@ function formatAmount(amount: string): string {
 const DisplayPriceField: React.FC = () => {
   const supplierId = useFormFields(([fields]) => fields.supplierId);
   const productTotalPrice = useFormFields(([fields]) => fields.product_total_price);
+  const { t } = useTranslation('fields');
 
 //   const { fields } = useWatchForm();
   const [displayPrice, setDisplayPrice] = useState('');
@@ -56,7 +58,7 @@ const DisplayPriceField: React.FC = () => {
 
   return (
     <div className='product-display-price'>
-      <label>Giá hiển thị: </label>
+       <span>{t('displayPrice')}</span>
       <strong>{displayPrice}</strong>
     </div>
   );
