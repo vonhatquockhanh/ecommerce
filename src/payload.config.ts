@@ -16,6 +16,7 @@ import dotenv from 'dotenv';
 import { CounterCollection } from './collections/counter.collection';
 import { cloudStorage } from '@payloadcms/plugin-cloud-storage';
 import { buildAdapter } from './utilities/s3Helper';
+import { ShipmentConfigCollection } from './collections/shipment-config.collection';
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 const categoryService = path.resolve(__dirname, './services/category.service');
@@ -37,6 +38,7 @@ export default buildConfig({
     CategoriesCollection,
     MediaCollection,
     OrderCollection,
+    ShipmentConfigCollection,
     ShipmentCollection,
     BillingCollection,
     SupplierCollection,
